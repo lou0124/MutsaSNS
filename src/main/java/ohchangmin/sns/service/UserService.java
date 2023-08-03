@@ -30,13 +30,13 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public Long login(LoginRequest request) {
+    public String login(LoginRequest request) {
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(NotFoundUser::new);
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new MisMatchedPassword();
         }
-        return user.getId();
+        return user.getUsername();
     }
 }

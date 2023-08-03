@@ -28,8 +28,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody @Valid LoginRequest request) {
-        Long userId = userService.login(request);
-        String token = jwtTokenUtils.generateToken(String.valueOf(userId));
+        String username = userService.login(request);
+        String token = jwtTokenUtils.generateToken(username);
         return Map.of("token", token);
     }
 }

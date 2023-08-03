@@ -84,10 +84,10 @@ class UserServiceTest {
                 .build();
 
         //when
-        Long userId = userService.login(request);
+        String username = userService.login(request);
 
         //then
-        assertThat(user.getId()).isEqualTo(userId);
+        assertThat(user.getUsername()).isEqualTo(username);
     }
 
     @DisplayName("로그인시 비밀번호가 일치하지 않으면 예외가 발생한다.")
