@@ -1,4 +1,4 @@
-package ohchangmin.sns.filter;
+package ohchangmin.sns.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

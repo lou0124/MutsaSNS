@@ -1,4 +1,4 @@
-package ohchangmin.sns.filter;
+package ohchangmin.sns.jwt;
 
 import lombok.extern.slf4j.Slf4j;
 import ohchangmin.sns.domain.User;

@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.dto.LoginRequest;
 import ohchangmin.sns.dto.SignUpRequest;
-import ohchangmin.sns.filter.JwtTokenUtils;
-import ohchangmin.sns.service.UserService;
+import ohchangmin.sns.jwt.JwtTokenUtils;
+import ohchangmin.sns.service.AuthService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,17 +18,17 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final UserService userService;
+    private final AuthService authService;
     private final JwtTokenUtils jwtTokenUtils;
 
     @PostMapping("/signup")
     public void signUp(@RequestBody @Valid SignUpRequest request) {
-        userService.signUp(request);
+        authService.signUp(request);
     }
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody @Valid LoginRequest request) {
-        String username = userService.login(request);
+        String username = authService.login(request);
         String token = jwtTokenUtils.generateToken(username);
         return Map.of("token", token);
     }

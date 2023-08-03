@@ -21,7 +21,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    private String profile_img;
+    private String profileImage;
 
     private String email;
 
@@ -33,5 +33,9 @@ public class User {
         this.password = password;
         this.email = email;
         this.phone = phone;
+    }
+
+    public void changProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -21,9 +22,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
-class UserServiceTest {
+class AuthServiceTest {
 
-    @Autowired UserService userService;
+    @Autowired
+    AuthService authService;
 
     @Autowired UserRepository userRepository;
 
@@ -38,7 +40,7 @@ class UserServiceTest {
                 .password("1234")
                 .build();
         //when
-        userService.signUp(request);
+        authService.signUp(request);
 
         //then
         List<User> all = userRepository.findAll();
@@ -63,11 +65,11 @@ class UserServiceTest {
                 .build();
 
         //when //then
-        assertThatThrownBy(() -> userService.signUp(request))
+        assertThatThrownBy(() -> authService.signUp(request))
                 .isInstanceOf(UsernameAlreadyExists.class);
     }
 
-    @DisplayName("등록된 회원은 로그인을 하여 아이디 값을 얻을 수 있다.")
+    @DisplayName("등록된 회원은 로그인을 하여 유저이름을 얻을 수 있다.")
     @Test
     void login() {
         //given
@@ -84,7 +86,7 @@ class UserServiceTest {
                 .build();
 
         //when
-        String username = userService.login(request);
+        String username = authService.login(request);
 
         //then
         assertThat(user.getUsername()).isEqualTo(username);
@@ -107,7 +109,7 @@ class UserServiceTest {
                 .build();
 
         //when //then
-        assertThatThrownBy(() -> userService.login(request))
+        assertThatThrownBy(() -> authService.login(request))
                 .isInstanceOf(MisMatchedPassword.class);
     }
 
@@ -121,7 +123,7 @@ class UserServiceTest {
                 .build();
 
         //when //then
-        assertThatThrownBy(() -> userService.login(request))
+        assertThatThrownBy(() -> authService.login(request))
                 .isInstanceOf(NotFoundUser.class);
     }
 }
