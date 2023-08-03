@@ -25,7 +25,6 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 public class WebSecurityConfig {
 
     private final JwtTokenFilter jwtTokenFilter;
-    private final UserRepository userRepository;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -50,9 +49,4 @@ public class WebSecurityConfig {
                 .addFilterBefore(jwtTokenFilter, AuthorizationFilter.class);
         return http.build();
     }
-
-//    @Bean
-//    public UserDetailsService userDetailsService(UserRepository userRepository) {
-//
-//    }
 }
