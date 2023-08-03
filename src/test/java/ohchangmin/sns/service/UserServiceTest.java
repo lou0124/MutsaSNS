@@ -107,7 +107,7 @@ class UserServiceTest {
                 .build();
 
         //when //then
-        assertThatThrownBy(() ->userService.login(request))
+        assertThatThrownBy(() -> userService.login(request))
                 .isInstanceOf(MisMatchedPassword.class);
     }
 
@@ -121,7 +121,7 @@ class UserServiceTest {
                 .build();
 
         //when //then
-        assertThatThrownBy(() ->userService.login(request))
+        assertThatThrownBy(() -> userService.login(request))
                 .isInstanceOf(NotFoundUser.class);
     }
 }

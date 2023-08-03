@@ -1,4 +1,4 @@
-package ohchangmin.sns.jwt;
+package ohchangmin.sns.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;

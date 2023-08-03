@@ -2,6 +2,7 @@ package ohchangmin.sns.config;
 
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.User;
+import ohchangmin.sns.filter.JwtTokenFilter;
 import ohchangmin.sns.repository.UserRepository;
 import ohchangmin.sns.service.UserPrincipal;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
@@ -22,6 +24,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
+    private final JwtTokenFilter jwtTokenFilter;
     private final UserRepository userRepository;
 
     @Bean
@@ -44,7 +47,8 @@ public class WebSecurityConfig {
                                 .anyRequest().authenticated()
                 )
                 .userDetailsService(userDetailsService(userRepository))
-                .csrf(AbstractHttpConfigurer::disable);
+                .csrf(AbstractHttpConfigurer::disable)
+                .addFilterBefore(jwtTokenFilter, AuthorizationFilter.class);
         return http.build();
     }
 
