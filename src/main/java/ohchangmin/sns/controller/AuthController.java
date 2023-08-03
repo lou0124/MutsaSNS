@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.dto.LoginRequest;
 import ohchangmin.sns.dto.SignUpRequest;
-import ohchangmin.sns.utils.JwtTokenUtils;
+import ohchangmin.sns.filter.JwtTokenUtils;
 import ohchangmin.sns.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

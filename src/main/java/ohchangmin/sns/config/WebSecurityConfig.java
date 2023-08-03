@@ -46,18 +46,13 @@ public class WebSecurityConfig {
                                 .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
                                 .anyRequest().authenticated()
                 )
-                .userDetailsService(userDetailsService(userRepository))
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtTokenFilter, AuthorizationFilter.class);
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return username -> {
-            User user = userRepository.findByUsername(username)
-                    .orElseThrow(() -> new UsernameNotFoundException(username + "을 찾을 수 없습니다."));
-            return new UserPrincipal(user);
-        };
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(UserRepository userRepository) {
+//
+//    }
 }
