@@ -2,14 +2,16 @@ package ohchangmin.sns.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import ohchangmin.sns.domain.User;
+import ohchangmin.sns.dto.LoginRequest;
 import ohchangmin.sns.dto.SignUpRequest;
+import ohchangmin.sns.jwt.JwtTokenUtils;
 import ohchangmin.sns.service.UserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -17,12 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenUtils jwtTokenUtils;
 
     @PostMapping("/signup")
     public void signUp(@RequestBody @Valid SignUpRequest request) {
-        String encodedPassword = passwordEncoder.encode(request.getPassword());
-        User user = request.toEntityWithEncodedPassword(encodedPassword);
-        userService.signUp(user);
+        userService.signUp(request);
+    }
+
+    @PostMapping("/login")
+    public Map<String, String> login(@RequestBody @Valid LoginRequest request) {
+        Long userId = userService.login(request);
+        String token = jwtTokenUtils.generateToken(String.valueOf(userId));
+        return Map.of("token", token);
     }
 }
+

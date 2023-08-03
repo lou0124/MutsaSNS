@@ -1,6 +1,7 @@
 package ohchangmin.sns.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ohchangmin.sns.domain.User;
@@ -18,6 +19,14 @@ public class SignUpRequest {
     private String email;
 
     private String phone;
+
+    @Builder
+    public SignUpRequest(String username, String password, String email, String phone) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+    }
 
     public User toEntityWithEncodedPassword(String encodedPassword) {
         return User.builder()

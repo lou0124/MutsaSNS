@@ -15,6 +15,13 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -30,15 +37,99 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/changminoh/Desktop/Project_2_OhChangMin",
+    "last_opened_file_path": "/Users/changminoh/Desktop/Project_2_OhChangMin/src/main/java/ohchangmin/sns",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "spring.configuration.checksum": "392ccc924420d5f81cdb5a1d229b2694",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/ohchangmin/sns" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ohchangmin.sns.exception" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.UserServiceTest">
+    <configuration name="All in sns.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sns.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sns.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ohchangmin.sns.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ohchangmin.sns.service" />
+      <option name="MAIN_CLASS_NAME" value="ohchangmin.sns.service.UserServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.login" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sns.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ohchangmin.sns.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ohchangmin.sns.service" />
+      <option name="MAIN_CLASS_NAME" value="ohchangmin.sns.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="login" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.loginMisMatchPassword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sns.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ohchangmin.sns.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ohchangmin.sns.service" />
+      <option name="MAIN_CLASS_NAME" value="ohchangmin.sns.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="loginMisMatchPassword" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.loginNotFoundUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sns.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ohchangmin.sns.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ohchangmin.sns.service" />
+      <option name="MAIN_CLASS_NAME" value="ohchangmin.sns.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="loginNotFoundUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SnsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="sns.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="ohchangmin.sns.SnsApplication" />
@@ -46,6 +137,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.UserServiceTest" />
+        <item itemvalue="JUnit.UserServiceTest.loginNotFoundUser" />
+        <item itemvalue="JUnit.UserServiceTest.loginMisMatchPassword" />
+        <item itemvalue="JUnit.UserServiceTest.login" />
+        <item itemvalue="JUnit.All in sns.test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -56,6 +156,7 @@
       <option name="presentableId" value="Default" />
       <updated>1691046412807</updated>
       <workItem from="1691046413864" duration="192000" />
+      <workItem from="1691046821087" duration="3068000" />
     </task>
     <servers />
   </component>
