@@ -26,6 +26,12 @@ public class Article {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = CascadeType.ALL)
     private List<ArticleImage> articleImages = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = CascadeType.ALL)
+    private List<Like> likes = new ArrayList<>();
+
     private String title;
 
     @Lob
@@ -55,5 +61,9 @@ public class Article {
             this.articleImages.add(articleImage);
             articleImage.setArticle(this);
         });
+    }
+
+    public String getUsername() {
+        return this.user.getUsername();
     }
 }

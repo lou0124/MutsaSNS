@@ -16,5 +16,5 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     Optional<Article> findByIdWithUser(@Param("articleId") Long articleId);
 
     @Query("select a from Article a join fetch a.user u where a.user.id =:userId")
-    List<Article> findArticles(@Param("userId") Long userId);
+    List<Article> findByUserId(@Param("userId") Long userId);
 }

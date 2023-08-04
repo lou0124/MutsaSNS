@@ -1,10 +1,12 @@
 package ohchangmin.sns.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import ohchangmin.sns.domain.Article;
 import ohchangmin.sns.dto.ArticleCreateRequest;
+import ohchangmin.sns.dto.ArticleElementResponse;
 import ohchangmin.sns.dto.ArticleResponse;
 import ohchangmin.sns.file.FileStore;
+import ohchangmin.sns.service.ArticleQueryService;
 import ohchangmin.sns.service.ArticleService;
 import ohchangmin.sns.service.UserPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final ArticleQueryService articleQueryService;
     private final FileStore fileStore;
 
     @PostMapping
@@ -40,7 +43,13 @@ public class ArticleController {
     }
 
     @GetMapping
-    public List<ArticleResponse> findArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        return articleService.findArticles(userPrincipal.getId());
+    public Result<List<ArticleElementResponse>> findArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        List<ArticleElementResponse> articles = articleQueryService.findArticles(userPrincipal.getId());
+        return new Result<>(articles.size(), articles);
+    }
+
+    @GetMapping("/{articleId}")
+    public ArticleResponse findArticle(@PathVariable Long articleId) {
+        return articleQueryService.findArticle(articleId);
     }
 }
