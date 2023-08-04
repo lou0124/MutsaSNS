@@ -1,5 +1,6 @@
 package ohchangmin.sns.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import ohchangmin.sns.domain.Article;
 import ohchangmin.sns.domain.ArticleImage;
@@ -8,6 +9,7 @@ import ohchangmin.sns.domain.Comment;
 import java.util.List;
 
 @Getter
+@Data
 public class ArticleResponse {
 
     private Long id;
@@ -18,7 +20,7 @@ public class ArticleResponse {
 
     private String content;
 
-    private List<String> articleImagesUrl;
+    private List<ArticleImageResponse> articleImages;
 
     private List<CommentResponse> comments;
 
@@ -31,20 +33,35 @@ public class ArticleResponse {
         this.title = article.getTitle();
         this.content = article.getContent();
         this.like = like;
-        this.articleImagesUrl = articleImages.stream()
-                .map(ArticleImage::getImageUrl)
+        this.articleImages = articleImages.stream()
+                .map(ArticleImageResponse::new)
                 .toList();
         this.comments = comments.stream()
                 .map(CommentResponse::new)
                 .toList();
     }
 
+    @Data
+    private static class ArticleImageResponse {
+
+        private Long id;
+        private String imagesUrl;
+
+        private ArticleImageResponse(ArticleImage articleImage) {
+            id = articleImage.getId();
+            imagesUrl = articleImage.getImageUrl();
+        }
+    }
+
+    @Data
     private static class CommentResponse {
 
+        private Long id;
         private String username;
         private String content;
 
         private CommentResponse(Comment comment) {
+            id = comment.getId();
             username = comment.getUsername();
             content = comment.getContent();
         }

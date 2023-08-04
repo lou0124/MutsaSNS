@@ -18,20 +18,19 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/article")
 public class ArticleController {
 
     private final ArticleService articleService;
     private final ArticleQueryService articleQueryService;
     private final FileStore fileStore;
 
-    @PostMapping
+    @PostMapping("/articles")
     public void createArticle(@AuthenticationPrincipal UserPrincipal userPrincipal,
                               @RequestBody ArticleCreateRequest request) {
         articleService.uploadArticle(userPrincipal.getId(), request);
     }
 
-    @PostMapping("/{articleId}/images")
+    @PostMapping("/articles/{articleId}/images")
     public void addImage(@AuthenticationPrincipal UserPrincipal userPrincipal,
                          @PathVariable Long articleId,
                          List<MultipartFile> images) {
@@ -42,13 +41,13 @@ public class ArticleController {
         articleService.addArticleImages(userPrincipal.getId(), articleId, imageUrls);
     }
 
-    @GetMapping
-    public Result<List<ArticleElementResponse>> findArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        List<ArticleElementResponse> articles = articleQueryService.findArticles(userPrincipal.getId());
+    @GetMapping("/users/{userId}/articles")
+    public Result<List<ArticleElementResponse>> findArticles(@PathVariable Long userId) {
+        List<ArticleElementResponse> articles = articleQueryService.findArticles(userId);
         return new Result<>(articles.size(), articles);
     }
 
-    @GetMapping("/{articleId}")
+    @GetMapping("/articles/{articleId}")
     public ArticleResponse findArticle(@PathVariable Long articleId) {
         return articleQueryService.findArticle(articleId);
     }

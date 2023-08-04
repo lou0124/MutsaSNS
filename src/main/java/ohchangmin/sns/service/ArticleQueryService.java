@@ -45,7 +45,6 @@ public class ArticleQueryService {
         List<ArticleImage> articleImages = articleImageRepository.findByArticleId(articleId);
         List<Comment> comments = commentRepository.findByArticleIdWithUser(articleId);
         long likeCount = likeRepository.countByArticle(article);
-
         return new ArticleResponse(article, comments, articleImages, likeCount);
     }
 
