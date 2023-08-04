@@ -1,7 +1,9 @@
 package ohchangmin.sns.controller;
 
 import lombok.RequiredArgsConstructor;
+import ohchangmin.sns.domain.Article;
 import ohchangmin.sns.dto.ArticleCreateRequest;
+import ohchangmin.sns.dto.ArticleResponse;
 import ohchangmin.sns.file.FileStore;
 import ohchangmin.sns.service.ArticleService;
 import ohchangmin.sns.service.UserPrincipal;
@@ -35,5 +37,10 @@ public class ArticleController {
                 .collect(Collectors.toList());
 
         articleService.addArticleImages(userPrincipal.getId(), articleId, imageUrls);
+    }
+
+    @GetMapping
+    public List<ArticleResponse> findArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        return articleService.findArticles(userPrincipal.getId());
     }
 }

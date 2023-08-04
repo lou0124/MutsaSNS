@@ -23,7 +23,7 @@ public class Article {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = CascadeType.ALL)
     private List<ArticleImage> articleImages = new ArrayList<>();
 
     private String title;
