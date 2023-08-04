@@ -21,7 +21,7 @@ public class SignUpRequest {
     private String phone;
 
     @Builder
-    public SignUpRequest(String username, String password, String email, String phone) {
+    private SignUpRequest(String username, String password, String email, String phone) {
         this.username = username;
         this.password = password;
         this.email = email;

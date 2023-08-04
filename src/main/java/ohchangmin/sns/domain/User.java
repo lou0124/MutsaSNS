@@ -5,6 +5,10 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ohchangmin.sns.exception.MisMatchedUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -13,7 +17,11 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Article> articles = new ArrayList<>();
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -37,5 +45,16 @@ public class User {
 
     public void changProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public void uploadArticle(Article article) {
+        articles.add(article);
+        article.setUser(this);
+    }
+
+    public void checkEquals(Long userId) {
+        if (!id.equals(userId)) {
+            throw new MisMatchedUser();
+        }
     }
 }
