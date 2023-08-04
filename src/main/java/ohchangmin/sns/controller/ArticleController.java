@@ -30,7 +30,7 @@ public class ArticleController {
         articleService.uploadArticle(userPrincipal.getId(), request);
     }
 
-    @PostMapping("/articles/{articleId}/images")
+    @PostMapping("/articles/{articleId}/article-images")
     public void addImage(@AuthenticationPrincipal UserPrincipal userPrincipal,
                          @PathVariable Long articleId,
                          List<MultipartFile> images) {
@@ -50,5 +50,12 @@ public class ArticleController {
     @GetMapping("/articles/{articleId}")
     public ArticleResponse findArticle(@PathVariable Long articleId) {
         return articleQueryService.findArticle(articleId);
+    }
+
+    @DeleteMapping("/article-images/{articleImageId}")
+    public void deleteImage(@AuthenticationPrincipal UserPrincipal userPrincipal,
+                            @PathVariable Long articleImageId) {
+        String imageUrl = articleService.deleteArticleImages(userPrincipal.getId(), articleImageId);
+        fileStore.deleteFile(imageUrl);
     }
 }

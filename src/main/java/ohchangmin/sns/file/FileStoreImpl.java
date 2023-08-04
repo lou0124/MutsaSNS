@@ -18,6 +18,7 @@ public class FileStoreImpl implements FileStore {
     @Value("${file.dir}")
     private String fileDir;
 
+    @Override
     public String storeFile(MultipartFile file) {
 
         if (file.isEmpty()) {
@@ -33,6 +34,21 @@ public class FileStoreImpl implements FileStore {
             throw new FileStoreFail(e);
         }
         return pathName;
+    }
+
+    @Override
+    public void deleteFile(String filePath) {
+        File file = new File(filePath);
+
+        if (file.exists()) {
+            if (file.delete()) {
+                log.info("파일 삭제 성공");
+            } else {
+                log.info("파일 삭제 실패");
+            }
+        } else {
+            log.info("해당 경로에 파일이 존재하지 않습니다.");
+        }
     }
 
     private String createStoreFileName(String originalFilename) {

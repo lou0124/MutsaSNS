@@ -39,4 +39,8 @@ public class ArticleImage {
     public Long getArticleId() {
         return article.getId();
     }
+
+    public void verifyUser(Long userId) {
+        article.verifyUser(userId);
+    }
 }

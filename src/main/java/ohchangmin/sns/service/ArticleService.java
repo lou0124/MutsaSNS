@@ -6,6 +6,7 @@ import ohchangmin.sns.domain.ArticleImage;
 import ohchangmin.sns.domain.User;
 import ohchangmin.sns.dto.ArticleCreateRequest;
 import ohchangmin.sns.exception.NotFoundArticle;
+import ohchangmin.sns.exception.NotFoundArticleImage;
 import ohchangmin.sns.repository.ArticleImageRepository;
 import ohchangmin.sns.repository.ArticleRepository;
 import ohchangmin.sns.repository.UserRepository;
@@ -39,6 +40,16 @@ public class ArticleService {
             setThumbnail(articleImages);
         }
         article.addImages(articleImages);
+    }
+
+    public String deleteArticleImages(Long userId, Long articleImageId) {
+        ArticleImage articleImage = articleImageRepository.findByIdWithUser(articleImageId)
+                .orElseThrow(NotFoundArticleImage::new);
+
+        articleImage.verifyUser(userId);
+        String imageUrl = articleImage.getImageUrl();
+        articleImageRepository.deleteById(articleImageId);
+        return imageUrl;
     }
 
     private List<ArticleImage> createArticleImages(List<String> imageUrls) {
