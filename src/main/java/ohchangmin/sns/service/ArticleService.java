@@ -54,4 +54,12 @@ public class ArticleService {
                 .map(ArticleImage::new)
                 .toList();
     }
+
+    public void deleteArticle(Long userId, Long articleId) {
+        Article article = articleRepository.findByIdWithUser(articleId)
+                .orElseThrow(NotFoundArticle::new);
+
+        article.verifyUser(userId);
+        article.delete();
+    }
 }

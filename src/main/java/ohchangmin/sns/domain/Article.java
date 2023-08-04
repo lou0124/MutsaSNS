@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ohchangmin.sns.exception.AlreadyDeletedArticle;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -39,13 +40,16 @@ public class Article {
 
     private boolean draft;
 
+    private boolean delete;
+
     private LocalDateTime deletedAt;
 
     @Builder
-    private Article(String title, String content, boolean draft) {
+    private Article(String title, String content) {
         this.title = title;
         this.content = content;
-        this.draft = draft;
+        this.draft = false;
+        this.delete = false;
     }
 
     public void setUser(User user) {
@@ -65,5 +69,13 @@ public class Article {
 
     public String getUsername() {
         return this.user.getUsername();
+    }
+
+    public void delete() {
+        if (delete) {
+            throw new AlreadyDeletedArticle();
+        }
+        delete = true;
+        deletedAt = LocalDateTime.now();
     }
 }

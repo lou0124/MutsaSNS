@@ -23,7 +23,6 @@ public class ArticleCreateRequest {
         return Article.builder()
                 .title(title)
                 .content(content)
-                .draft(false)
                 .build();
     }
 }

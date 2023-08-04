@@ -58,4 +58,10 @@ public class ArticleController {
         String imageUrl = articleService.deleteArticleImages(userPrincipal.getId(), articleImageId);
         fileStore.deleteFile(imageUrl);
     }
+
+    @DeleteMapping("/articles/{articleId}")
+    public void deleteArticle(@AuthenticationPrincipal UserPrincipal userPrincipal,
+                            @PathVariable Long articleId) {
+        articleService.deleteArticle(userPrincipal.getId(), articleId);
+    }
 }

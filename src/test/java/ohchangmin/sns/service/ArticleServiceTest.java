@@ -1,9 +1,9 @@
 package ohchangmin.sns.service;
 
 import ohchangmin.sns.domain.Article;
-import ohchangmin.sns.domain.ArticleImage;
 import ohchangmin.sns.domain.User;
 import ohchangmin.sns.dto.ArticleCreateRequest;
+import ohchangmin.sns.exception.AlreadyDeletedArticle;
 import ohchangmin.sns.exception.MisMatchedUser;
 import ohchangmin.sns.repository.ArticleImageRepository;
 import ohchangmin.sns.repository.ArticleRepository;
@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,13 +23,17 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Transactional
 class ArticleServiceTest {
 
-    @Autowired UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
-    @Autowired ArticleService articleService;
+    @Autowired
+    ArticleService articleService;
 
-    @Autowired ArticleRepository articleRepository;
+    @Autowired
+    ArticleRepository articleRepository;
 
-    @Autowired ArticleImageRepository articleImageRepository;
+    @Autowired
+    ArticleImageRepository articleImageRepository;
 
     @DisplayName("로그인한 유저는 피드를 등록할 수 있다.")
     @Test
@@ -90,5 +92,43 @@ class ArticleServiceTest {
         //when //then
         assertThatThrownBy(() -> articleService.addArticleImages(user.getId() + 1, article.getId(), List.of("이미지경로1", "이미지경로2")))
                 .isInstanceOf(MisMatchedUser.class);
+    }
+
+    @DisplayName("피드의 주인은 피드를 삭제할 수 있다.")
+    @Test
+    void deleteArticle() {
+        //given
+        User user = User.builder().username("user").password("1234").build();
+        userRepository.save(user);
+
+        Article article = Article.builder().title("제목 입니다.").content("내용 입니다.").build();
+        article.setUser(user);
+        articleRepository.save(article);
+
+        //when
+        articleService.deleteArticle(user.getId(), article.getId());
+
+        //then
+        Article findArticle = articleRepository.findById(article.getId()).get();
+        assertThat(findArticle.isDelete()).isTrue();
+        assertThat(findArticle.getDeletedAt()).isNotNull();
+    }
+
+    @DisplayName("이미 삭제된 피드를 삭제할 시 예외가 발생한다.")
+    @Test
+    void alreadyDeletedArticle() {
+        //given
+        User user = User.builder().username("user").password("1234").build();
+        userRepository.save(user);
+
+        Article article = Article.builder().title("제목 입니다.").content("내용 입니다.").build();
+        article.setUser(user);
+        article.delete();
+
+        articleRepository.save(article);
+
+        //when //then
+        assertThatThrownBy(() -> articleService.deleteArticle(user.getId(), article.getId()))
+                .isInstanceOf(AlreadyDeletedArticle.class);
     }
 }
