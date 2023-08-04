@@ -36,9 +36,6 @@ public class ArticleService {
         article.verifyUser(userId);
 
         List<ArticleImage> articleImages = createArticleImages(imageUrls);
-        if (!existsArticleImagesBy(articleId)) {
-            setThumbnail(articleImages);
-        }
         article.addImages(articleImages);
     }
 
@@ -56,15 +53,5 @@ public class ArticleService {
         return imageUrls.stream()
                 .map(ArticleImage::new)
                 .toList();
-    }
-
-    private boolean existsArticleImagesBy(Long articleId) {
-        return articleImageRepository.existsByArticleId(articleId);
-    }
-
-    private void setThumbnail(List<ArticleImage> articleImages) {
-        articleImages.stream()
-                .findFirst()
-                .ifPresent(image -> image.setThumbnail(true));
     }
 }

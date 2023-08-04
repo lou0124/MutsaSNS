@@ -91,25 +91,4 @@ class ArticleServiceTest {
         assertThatThrownBy(() -> articleService.addArticleImages(user.getId() + 1, article.getId(), List.of("이미지경로1", "이미지경로2")))
                 .isInstanceOf(MisMatchedUser.class);
     }
-
-    @DisplayName("피드의 추가한 첫 번째 이미지는 대표이미지가 된다.")
-    @Test
-    void addArticleImagesFirstImageThumbnail() {
-        //given
-        User user = User.builder().username("user").password("1234").build();
-        userRepository.save(user);
-
-        Article article = Article.builder().title("제목 입니다.").content("내용 입니다.").build();
-        article.setUser(user);
-        articleRepository.save(article);
-
-        //when
-        articleService.addArticleImages(user.getId(), article.getId(), List.of("이미지경로1", "이미지경로2"));
-
-        // then
-        List<ArticleImage> all = articleImageRepository.findAll();
-        all.sort(Comparator.comparing(ArticleImage::getId));
-        assertThat(all.get(0).isThumbnail()).isTrue();
-        assertThat(all.get(1).isThumbnail()).isFalse();
-    }
 }

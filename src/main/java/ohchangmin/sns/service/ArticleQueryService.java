@@ -34,7 +34,7 @@ public class ArticleQueryService {
 
         List<ArticleElementResponse> responses = createArticleResponse(articles);
         Map<Long, String> imageUrlMap = createImageUrlMap(articleImages);
-        setThumbnails(responses, imageUrlMap);
+        setRepresentativeImages(responses, imageUrlMap);
         return responses;
     }
 
@@ -59,7 +59,7 @@ public class ArticleQueryService {
                 .collect(Collectors.toMap(ArticleImage::getArticleId, ArticleImage::getImageUrl));
     }
 
-    private void setThumbnails(List<ArticleElementResponse> articles, Map<Long, String> imageUrlMap) {
+    private void setRepresentativeImages(List<ArticleElementResponse> articles, Map<Long, String> imageUrlMap) {
         articles.forEach(article -> {
             article.setThumbnail(imageUrlMap.get(article.getId()));
         });

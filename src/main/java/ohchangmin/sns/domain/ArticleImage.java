@@ -21,19 +21,12 @@ public class ArticleImage {
     @Column(nullable = false)
     private String imageUrl;
 
-    private boolean thumbnail;
-
     public ArticleImage(String imageUrl) {
         this.imageUrl = imageUrl;
-        this.thumbnail = false;
     }
 
     public void setArticle(Article article) {
         this.article = article;
-    }
-
-    public void setThumbnail(boolean thumbnail) {
-        this.thumbnail = thumbnail;
     }
 
     public Long getArticleId() {
