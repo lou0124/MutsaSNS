@@ -173,3 +173,5 @@ gradle-app.setting
 /src/main/generated/
 
 .idea/
+
+src/main/resources/static/images/

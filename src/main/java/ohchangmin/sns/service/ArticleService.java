@@ -6,6 +6,7 @@ import ohchangmin.sns.domain.ArticleImage;
 import ohchangmin.sns.domain.User;
 import ohchangmin.sns.dto.ArticleCreateRequest;
 import ohchangmin.sns.exception.NotFoundArticle;
+import ohchangmin.sns.repository.ArticleImageRepository;
 import ohchangmin.sns.repository.ArticleRepository;
 import ohchangmin.sns.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class ArticleService {
 
     private final UserRepository userRepository;
     private final ArticleRepository articleRepository;
+    private final ArticleImageRepository articleImageRepository;
 
     public void uploadArticle(Long userId, ArticleCreateRequest request) {
         User user = userRepository.findByIdOrThrow(userId);
@@ -33,8 +35,9 @@ public class ArticleService {
         article.verifyUser(userId);
 
         List<ArticleImage> articleImages = createArticleImages(imageUrls);
-        setThumbnail(articleImages);
-
+        if (!existsArticleImagesBy(articleId)) {
+            setThumbnail(articleImages);
+        }
         article.addImages(articleImages);
     }
 
@@ -44,10 +47,13 @@ public class ArticleService {
                 .toList();
     }
 
+    private boolean existsArticleImagesBy(Long articleId) {
+        return articleImageRepository.existsByArticleId(articleId);
+    }
+
     private void setThumbnail(List<ArticleImage> articleImages) {
-        if (!articleImages.isEmpty()) {
-            ArticleImage articleImage = articleImages.get(0);
-            articleImage.setThumbnail(true);
-        }
+        articleImages.stream()
+                .findFirst()
+                .ifPresent(image -> image.setThumbnail(true));
     }
 }

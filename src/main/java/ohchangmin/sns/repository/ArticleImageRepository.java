@@ -17,4 +17,7 @@ public interface ArticleImageRepository extends JpaRepository<ArticleImage, Long
 
     @Query("select ai from ArticleImage ai where ai.article.id = :articleId")
     List<ArticleImage> findByArticleId(@Param("articleId") Long articleId);
+
+    @Query("select case when count (ai) > 0 then true else false end from ArticleImage ai where ai.article.id = :articleId")
+    boolean existsByArticleId(@Param("articleId") Long articleId);
 }
