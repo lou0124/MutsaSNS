@@ -7,12 +7,13 @@ import ohchangmin.sns.dto.CommentUpdateRequest;
 import ohchangmin.sns.service.CommentService;
 import ohchangmin.sns.service.UserPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Repository;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Repository
+@RestController
 @RequiredArgsConstructor
 public class CommentController {
 
