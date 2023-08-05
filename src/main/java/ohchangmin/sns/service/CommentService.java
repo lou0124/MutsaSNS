@@ -41,4 +41,13 @@ public class CommentService {
         comment.verifyUser(userId);
         comment.modify(content);
     }
+
+    @Transactional
+    public void deleteComment(Long userId, Long commentId) {
+        Comment comment = commentRepository.findByIdWithUser(commentId)
+                .orElseThrow(NotFoundComment::new);
+
+        comment.verifyUser(userId);
+        comment.delete();
+    }
 }

@@ -7,10 +7,7 @@ import ohchangmin.sns.dto.CommentUpdateRequest;
 import ohchangmin.sns.service.CommentService;
 import ohchangmin.sns.service.UserPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,5 +27,11 @@ public class CommentController {
                               @PathVariable Long commentId,
                               @RequestBody @Valid CommentUpdateRequest request) {
         commentService.modifyComment(userPrincipal.getId(), commentId, request.getContent());
+    }
+
+    @DeleteMapping("/comments/{commentId}")
+    public void deleteComment(@AuthenticationPrincipal UserPrincipal userPrincipal,
+                              @PathVariable Long commentId) {
+        commentService.deleteComment(userPrincipal.getId(), commentId);
     }
 }

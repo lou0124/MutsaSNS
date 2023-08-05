@@ -5,7 +5,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ohchangmin.sns.exception.AlreadyDeletedArticle;
+import ohchangmin.sns.exception.AlreadyDeletedComment;
 import ohchangmin.sns.exception.UnauthorizedAccess;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -26,6 +30,8 @@ public class Comment extends BaseTime {
 
     @Lob
     private String content;
+
+    private boolean delete;
 
     public String getUsername() {
         return user.getUsername();
@@ -57,5 +63,12 @@ public class Comment extends BaseTime {
 
     public void modify(String content) {
         this.content = content;
+    }
+
+    public void delete(){
+        if (delete) {
+            throw new AlreadyDeletedComment();
+        }
+        delete = true;
     }
 }
