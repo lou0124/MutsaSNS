@@ -60,13 +60,6 @@ public class Article extends BaseTime {
         user.checkEquals(userId);
     }
 
-    public void addImages(List<ArticleImage> articleImages) {
-        articleImages.forEach(articleImage -> {
-            this.articleImages.add(articleImage);
-            articleImage.setArticle(this);
-        });
-    }
-
     public String getUsername() {
         return this.user.getUsername();
     }
@@ -77,5 +70,16 @@ public class Article extends BaseTime {
         }
         delete = true;
         deletedAt = LocalDateTime.now();
+    }
+
+    public void addImages(List<ArticleImage> articleImages) {
+        articleImages.forEach(articleImage -> {
+            this.articleImages.add(articleImage);
+            articleImage.setArticle(this);
+        });
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 }
