@@ -1,6 +1,5 @@
 package ohchangmin.sns.controller;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.dto.ArticleCreateRequest;
 import ohchangmin.sns.dto.ArticleElementResponse;

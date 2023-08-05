@@ -49,12 +49,6 @@ public class ArticleService {
         return imageUrl;
     }
 
-    private List<ArticleImage> createArticleImages(List<String> imageUrls) {
-        return imageUrls.stream()
-                .map(ArticleImage::new)
-                .toList();
-    }
-
     public void deleteArticle(Long userId, Long articleId) {
         Article article = articleRepository.findByIdWithUser(articleId)
                 .orElseThrow(NotFoundArticle::new);
@@ -62,4 +56,11 @@ public class ArticleService {
         article.verifyUser(userId);
         article.delete();
     }
+
+    private List<ArticleImage> createArticleImages(List<String> imageUrls) {
+        return imageUrls.stream()
+                .map(ArticleImage::new)
+                .toList();
+    }
+
 }
