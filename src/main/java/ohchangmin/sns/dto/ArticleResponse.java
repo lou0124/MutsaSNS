@@ -9,22 +9,21 @@ import ohchangmin.sns.domain.Comment;
 import java.util.List;
 
 @Getter
-@Data
 public class ArticleResponse {
 
-    private Long id;
+    private final Long id;
 
-    private String username;
+    private final String username;
 
-    private String title;
+    private final String title;
 
-    private String content;
+    private final String content;
 
-    private List<ArticleImageResponse> articleImages;
+    private final List<ArticleImageResponse> articleImages;
 
-    private List<CommentResponse> comments;
+    private final List<CommentResponse> comments;
 
-    private long like;
+    private final long like;
 
     public ArticleResponse(Article article) {
         this.id = article.getId();

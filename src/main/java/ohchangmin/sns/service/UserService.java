@@ -2,6 +2,7 @@ package ohchangmin.sns.service;
 
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.User;
+import ohchangmin.sns.dto.UserResponse;
 import ohchangmin.sns.exception.NotFoundUser;
 import ohchangmin.sns.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,12 @@ public class UserService {
                 .orElseThrow(NotFoundUser::new);
 
         user.changProfileImage(profileImage);
+    }
+
+    public UserResponse findUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(NotFoundUser::new);
+
+        return new UserResponse(user);
     }
 }
