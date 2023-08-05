@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ohchangmin.sns.exception.UnauthorizedAccess;
 
 @Entity
 @Getter
@@ -49,7 +50,9 @@ public class Comment extends BaseTime {
     }
 
     public void verifyUser(Long userId) {
-        user.checkEquals(userId);
+        if (user.isEqualsId(userId)) {
+            throw new UnauthorizedAccess("다른 사용자는 해당 댓글의 기능을 사용할 수 없습니다.");
+        }
     }
 
     public void modify(String content) {

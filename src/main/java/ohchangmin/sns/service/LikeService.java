@@ -2,6 +2,7 @@ package ohchangmin.sns.service;
 
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.Article;
+import ohchangmin.sns.domain.Like;
 import ohchangmin.sns.domain.User;
 import ohchangmin.sns.exception.NotFoundArticle;
 import ohchangmin.sns.exception.NotFoundUser;
@@ -23,12 +24,12 @@ public class LikeService {
     public void pushLike(Long userId, Long articleId) {
         Article article = articleRepository.findByIdWithUser(articleId)
                 .orElseThrow(NotFoundArticle::new);
-        // 다른 유저만 접근 가능 하도록 검사
-
+        article.verifyOtherUser(userId);
 
         User user = userRepository.findById(userId)
                 .orElseThrow(NotFoundUser::new);
 
-
+        Like like = Like.createLike(user, article);
+        likeRepository.save(like);
     }
 }

@@ -52,9 +52,7 @@ public class User extends BaseTime {
         article.setUser(this);
     }
 
-    public void checkEquals(Long userId) {
-        if (!id.equals(userId)) {
-            throw new MisMatchedUser();
-        }
+    public boolean isEqualsId(Long userId) {
+        return id.equals(userId);
     }
 }

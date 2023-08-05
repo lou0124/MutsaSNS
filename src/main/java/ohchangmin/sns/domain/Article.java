@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ohchangmin.sns.exception.AlreadyDeletedArticle;
+import ohchangmin.sns.exception.UnauthorizedAccess;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -57,7 +58,15 @@ public class Article extends BaseTime {
     }
 
     public void verifyUser(Long userId) {
-        user.checkEquals(userId);
+        if (!user.isEqualsId(userId)) {
+            throw new UnauthorizedAccess("다른 사용자는 해당 피드의 기능을 사용 할 수 없습니다.");
+        }
+    }
+
+    public void verifyOtherUser(Long userId) {
+        if (user.isEqualsId(userId)) {
+            throw new UnauthorizedAccess("동일한 사용자는 해당 피드의 기능을 사용 할 수 없습니다.");
+        }
     }
 
     public String getUsername() {
