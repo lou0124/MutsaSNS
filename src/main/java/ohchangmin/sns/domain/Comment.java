@@ -43,7 +43,7 @@ public class Comment extends BaseTime {
                 .article(article)
                 .content(content)
                 .build();
-        user.addComment(comment);
+
         article.addComment(comment);
         return comment;
     }

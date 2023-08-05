@@ -23,9 +23,6 @@ public class User extends BaseTime {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Article> articles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
-
     @Column(unique = true, nullable = false)
     private String username;
 
@@ -59,9 +56,5 @@ public class User extends BaseTime {
         if (!id.equals(userId)) {
             throw new MisMatchedUser();
         }
-    }
-
-    public void addComment(Comment comment){
-        comments.add(comment);
     }
 }

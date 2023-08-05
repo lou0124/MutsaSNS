@@ -17,9 +17,6 @@ public interface ArticleImageRepository extends JpaRepository<ArticleImage, Long
         "(select min(ai2.id) from ArticleImage ai2 where ai2.article = ai.article)")
     List<ArticleImage> findInArticle(@Param("articles") List<Article> articles);
 
-    @Query("select ai from ArticleImage ai where ai.article.id = :articleId")
-    List<ArticleImage> findByArticleId(@Param("articleId") Long articleId);
-
     @Query("select ai from ArticleImage ai join fetch ai.article a join fetch a.user u where ai.id = :articleImageId")
     Optional<ArticleImage> findByIdWithUser(@Param("articleImageId") Long articleImageId);
 }
