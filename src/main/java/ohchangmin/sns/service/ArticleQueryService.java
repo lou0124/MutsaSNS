@@ -25,8 +25,6 @@ public class ArticleQueryService {
 
     private final ArticleRepository articleRepository;
     private final ArticleImageRepository articleImageRepository;
-    private final CommentRepository commentRepository;
-    private final LikeRepository likeRepository;
 
     public List<ArticleElementResponse> findArticles(Long userId) {
         List<Article> articles = articleRepository.findByUserId(userId);
@@ -42,10 +40,7 @@ public class ArticleQueryService {
         Article article = articleRepository.findByIdWithUser(articleId)
                 .orElseThrow(NotFoundArticle::new);
 
-        List<ArticleImage> articleImages = articleImageRepository.findByArticleId(articleId);
-        List<Comment> comments = commentRepository.findByArticleIdWithUser(articleId);
-        long likeCount = likeRepository.countByArticle(article);
-        return new ArticleResponse(article, comments, articleImages, likeCount);
+        return new ArticleResponse(article);
     }
 
     private List<ArticleElementResponse> createArticleResponse(List<Article> articles) {

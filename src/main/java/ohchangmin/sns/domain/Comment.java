@@ -37,7 +37,7 @@ public class Comment extends BaseTime {
         this.content = content;
     }
 
-    public static Comment writeComment(User user, Article article, String content) {
+    public static Comment createComment(User user, Article article, String content) {
         Comment comment = Comment.builder()
                 .user(user)
                 .article(article)

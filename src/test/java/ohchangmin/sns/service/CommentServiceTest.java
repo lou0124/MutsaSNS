@@ -7,7 +7,6 @@ import ohchangmin.sns.exception.MisMatchedUser;
 import ohchangmin.sns.repository.ArticleRepository;
 import ohchangmin.sns.repository.CommentRepository;
 import ohchangmin.sns.repository.UserRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -70,7 +68,7 @@ class CommentServiceTest {
         article.setUser(user1);
         articleRepository.save(article);
 
-        Comment comment = Comment.writeComment(user2, article, "댓글입니다.");
+        Comment comment = Comment.createComment(user2, article, "댓글입니다.");
         commentRepository.save(comment);
 
         //when
@@ -95,7 +93,7 @@ class CommentServiceTest {
         article.setUser(user1);
         articleRepository.save(article);
 
-        Comment comment = Comment.writeComment(user2, article, "댓글입니다.");
+        Comment comment = Comment.createComment(user2, article, "댓글입니다.");
         commentRepository.save(comment);
 
         //when //then

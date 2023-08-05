@@ -26,17 +26,16 @@ public class ArticleResponse {
 
     private long like;
 
-
-    public ArticleResponse(Article article, List<Comment> comments, List<ArticleImage> articleImages, long like) {
+    public ArticleResponse(Article article) {
         this.id = article.getId();
         this.username = article.getUsername();
         this.title = article.getTitle();
         this.content = article.getContent();
-        this.like = like;
-        this.articleImages = articleImages.stream()
+        this.like = article.getLikesCount();
+        this.articleImages = article.getArticleImages().stream()
                 .map(ArticleImageResponse::new)
                 .toList();
-        this.comments = comments.stream()
+        this.comments = article.getComments().stream()
                 .map(CommentResponse::new)
                 .toList();
     }

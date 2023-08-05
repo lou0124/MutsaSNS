@@ -64,6 +64,10 @@ public class Article extends BaseTime {
         return this.user.getUsername();
     }
 
+    public long getLikesCount() {
+        return this.likes.size();
+    }
+
     public void delete() {
         if (delete) {
             throw new AlreadyDeletedArticle();
@@ -82,4 +86,9 @@ public class Article extends BaseTime {
     public void addComment(Comment comment) {
         comments.add(comment);
     }
+
+    public void addLike(Like like) {
+        likes.add(like);
+    }
+
 }
