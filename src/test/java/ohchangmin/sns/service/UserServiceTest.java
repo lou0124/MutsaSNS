@@ -83,4 +83,28 @@ class UserServiceTest {
         assertThatThrownBy(() -> userService.follow(user.getId(), user.getId()))
                 .isInstanceOf(NotAllowFollowSelf.class);
     }
+
+    @DisplayName("팔로잉 한 사용자는 팔로워를 언팔로우 할 수 있습니다.")
+    @Test
+    void unfollow() {
+        //given
+        User user1 = User.builder()
+                .username("user1")
+                .password("1234")
+                .build();
+        User user2 = User.builder()
+                .username("user2")
+                .password("1234")
+                .build();
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userFollowRepository.save(UserFollow.createFollow(user1, user2));
+
+        //when
+        userService.unfollow(user1.getId(), user2.getId());
+
+        //then
+        List<UserFollow> all = userFollowRepository.findAll();
+        assertThat(all.isEmpty()).isTrue();
+    }
 }

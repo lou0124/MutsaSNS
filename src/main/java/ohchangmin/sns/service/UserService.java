@@ -5,6 +5,7 @@ import ohchangmin.sns.domain.User;
 import ohchangmin.sns.domain.UserFollow;
 import ohchangmin.sns.dto.UserResponse;
 import ohchangmin.sns.exception.NotAllowFollowSelf;
+import ohchangmin.sns.exception.NotFoundUserFollow;
 import ohchangmin.sns.repository.UserFollowRepository;
 import ohchangmin.sns.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,12 @@ public class UserService {
         User follower = userRepository.findByIdOrThrow(followerId);
         UserFollow userFollow = UserFollow.createFollow(following, follower);
         userFollowRepository.save(userFollow);
+    }
+
+    @Transactional
+    public void unfollow(Long followingId, Long followerId) {
+        UserFollow userFollow = userFollowRepository.findByFollowingIdAndFollowerId(followingId, followerId)
+                .orElseThrow(NotFoundUserFollow::new);
+        userFollowRepository.delete(userFollow);
     }
 }

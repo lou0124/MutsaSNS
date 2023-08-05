@@ -31,4 +31,9 @@ public class UserController {
     public void follow(@AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Long userId) {
         userService.follow(userPrincipal.getId(), userId);
     }
+
+    @PostMapping("/users/{userId}/unfollow")
+    public void unfollow(@AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Long userId) {
+        userService.unfollow(userPrincipal.getId(), userId);
+    }
 }
