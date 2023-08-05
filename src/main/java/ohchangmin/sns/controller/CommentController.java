@@ -3,6 +3,7 @@ package ohchangmin.sns.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.dto.CommentCreateRequest;
+import ohchangmin.sns.dto.CommentUpdateRequest;
 import ohchangmin.sns.service.CommentService;
 import ohchangmin.sns.service.UserPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,5 +23,12 @@ public class CommentController {
                            @PathVariable Long articleId,
                            @RequestBody @Valid CommentCreateRequest request) {
         commentService.writeComment(userPrincipal.getId(), articleId, request.getContent());
+    }
+
+    @PostMapping("/comments/{commentId}")
+    public void modifyComment(@AuthenticationPrincipal UserPrincipal userPrincipal,
+                              @PathVariable Long commentId,
+                              @RequestBody @Valid CommentUpdateRequest request) {
+        commentService.modifyComment(userPrincipal.getId(), commentId, request.getContent());
     }
 }

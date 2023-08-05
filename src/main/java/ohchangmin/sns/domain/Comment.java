@@ -47,4 +47,12 @@ public class Comment extends BaseTime {
         article.addComment(comment);
         return comment;
     }
+
+    public void verifyUser(Long userId) {
+        user.checkEquals(userId);
+    }
+
+    public void modify(String content) {
+        this.content = content;
+    }
 }

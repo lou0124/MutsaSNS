@@ -5,6 +5,7 @@ import ohchangmin.sns.domain.Article;
 import ohchangmin.sns.domain.Comment;
 import ohchangmin.sns.domain.User;
 import ohchangmin.sns.exception.NotFoundArticle;
+import ohchangmin.sns.exception.NotFoundComment;
 import ohchangmin.sns.exception.NotFoundUser;
 import ohchangmin.sns.repository.ArticleRepository;
 import ohchangmin.sns.repository.CommentRepository;
@@ -30,5 +31,14 @@ public class CommentService {
 
         Comment comment = Comment.writeComment(user, article, content);
         commentRepository.save(comment);
+    }
+
+    @Transactional
+    public void modifyComment(Long userId, Long commentId, String content) {
+        Comment comment = commentRepository.findByIdWithUser(commentId)
+                .orElseThrow(NotFoundComment::new);
+
+        comment.verifyUser(userId);
+        comment.modify(content);
     }
 }
