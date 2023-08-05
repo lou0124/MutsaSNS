@@ -2,9 +2,7 @@ package ohchangmin.sns.service;
 
 import ohchangmin.sns.domain.Article;
 import ohchangmin.sns.domain.User;
-import ohchangmin.sns.dto.ArticleCreateRequest;
-import ohchangmin.sns.exception.AlreadyDeletedArticle;
-import ohchangmin.sns.exception.MisMatchedUser;
+import ohchangmin.sns.request.ArticleCreateRequest;
 import ohchangmin.sns.exception.NotFoundArticle;
 import ohchangmin.sns.exception.UnauthorizedAccess;
 import ohchangmin.sns.repository.ArticleImageRepository;

@@ -3,7 +3,7 @@ package ohchangmin.sns.service;
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.User;
 import ohchangmin.sns.domain.UserFollow;
-import ohchangmin.sns.dto.UserResponse;
+import ohchangmin.sns.response.UserResponse;
 import ohchangmin.sns.exception.NotAllowFollowSelf;
 import ohchangmin.sns.exception.NotFoundUserFollow;
 import ohchangmin.sns.repository.UserFollowRepository;

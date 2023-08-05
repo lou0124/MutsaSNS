@@ -1,4 +1,4 @@
-package ohchangmin.sns.dto;
+package ohchangmin.sns.response;
 
 import lombok.Getter;
 import ohchangmin.sns.domain.Article;
@@ -18,7 +18,7 @@ public class ArticleElementResponse {
 
     public ArticleElementResponse(Article article) {
         this.id = article.getId();
-        this.username = article.getUser().getUsername();
+        this.username = article.getUsername();
         this.title = article.getTitle();
     }
 

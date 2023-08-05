@@ -2,8 +2,8 @@ package ohchangmin.sns.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import ohchangmin.sns.dto.CommentCreateRequest;
-import ohchangmin.sns.dto.CommentUpdateRequest;
+import ohchangmin.sns.request.CommentCreateRequest;
+import ohchangmin.sns.request.CommentUpdateRequest;
 import ohchangmin.sns.service.CommentService;
 import ohchangmin.sns.service.UserPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

@@ -1,4 +1,4 @@
-package ohchangmin.sns.dto;
+package ohchangmin.sns.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;

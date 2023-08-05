@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.Article;
 import ohchangmin.sns.domain.ArticleImage;
 import ohchangmin.sns.domain.User;
-import ohchangmin.sns.dto.ArticleCreateRequest;
+import ohchangmin.sns.request.ArticleCreateRequest;
 import ohchangmin.sns.exception.NotFoundArticle;
 import ohchangmin.sns.exception.NotFoundArticleImage;
 import ohchangmin.sns.repository.ArticleImageRepository;

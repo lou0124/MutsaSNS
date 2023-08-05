@@ -39,8 +39,6 @@ public class Article extends BaseTime {
     @Lob
     private String content;
 
-    private boolean draft;
-
     private boolean delete;
 
     private LocalDateTime deletedAt;
@@ -49,7 +47,6 @@ public class Article extends BaseTime {
     private Article(String title, String content) {
         this.title = title;
         this.content = content;
-        this.draft = false;
         this.delete = false;
     }
 

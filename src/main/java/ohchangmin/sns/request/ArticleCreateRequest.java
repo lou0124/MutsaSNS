@@ -1,4 +1,4 @@
-package ohchangmin.sns.dto;
+package ohchangmin.sns.request;
 
 import lombok.Builder;
 import lombok.Getter;

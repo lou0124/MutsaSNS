@@ -2,8 +2,8 @@ package ohchangmin.sns.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import ohchangmin.sns.dto.LoginRequest;
-import ohchangmin.sns.dto.SignUpRequest;
+import ohchangmin.sns.request.LoginRequest;
+import ohchangmin.sns.request.SignUpRequest;
 import ohchangmin.sns.jwt.JwtTokenUtils;
 import ohchangmin.sns.service.AuthService;
 import org.springframework.web.bind.annotation.PostMapping;

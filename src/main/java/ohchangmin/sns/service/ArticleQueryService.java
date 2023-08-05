@@ -2,8 +2,8 @@ package ohchangmin.sns.service;
 
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.*;
-import ohchangmin.sns.dto.ArticleElementResponse;
-import ohchangmin.sns.dto.ArticleResponse;
+import ohchangmin.sns.response.ArticleElementResponse;
+import ohchangmin.sns.response.ArticleResponse;
 import ohchangmin.sns.exception.NotFoundArticle;
 import ohchangmin.sns.repository.*;
 import org.springframework.stereotype.Service;

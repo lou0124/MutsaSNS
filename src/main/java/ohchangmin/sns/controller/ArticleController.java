@@ -1,11 +1,8 @@
 package ohchangmin.sns.controller;
 
 import lombok.RequiredArgsConstructor;
-import ohchangmin.sns.dto.ArticleCreateRequest;
-import ohchangmin.sns.dto.ArticleElementResponse;
-import ohchangmin.sns.dto.ArticleResponse;
+import ohchangmin.sns.request.ArticleCreateRequest;
 import ohchangmin.sns.file.FileStore;
-import ohchangmin.sns.service.ArticleQueryService;
 import ohchangmin.sns.service.ArticleService;
 import ohchangmin.sns.service.UserPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,7 +17,6 @@ import java.util.stream.Collectors;
 public class ArticleController {
 
     private final ArticleService articleService;
-    private final ArticleQueryService articleQueryService;
     private final FileStore fileStore;
 
     @PostMapping("/articles")
@@ -40,17 +36,6 @@ public class ArticleController {
         articleService.addArticleImages(userPrincipal.getId(), articleId, imageUrls);
     }
 
-    @GetMapping("/users/{userId}/articles")
-    public Result<List<ArticleElementResponse>> findArticles(@PathVariable Long userId) {
-        List<ArticleElementResponse> articles = articleQueryService.findArticles(userId);
-        return new Result<>(articles.size(), articles);
-    }
-
-    @GetMapping("/articles/{articleId}")
-    public ArticleResponse findArticle(@PathVariable Long articleId) {
-        return articleQueryService.findArticle(articleId);
-    }
-
     @DeleteMapping("/article-images/{articleImageId}")
     public void deleteImage(@AuthenticationPrincipal UserPrincipal userPrincipal,
                             @PathVariable Long articleImageId) {
@@ -63,11 +48,4 @@ public class ArticleController {
                               @PathVariable Long articleId) {
         articleService.deleteArticle(userPrincipal.getId(), articleId);
     }
-
-    @GetMapping("/articles/follow")
-    public Result<List<ArticleElementResponse>> findFollowArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        List<ArticleElementResponse> articles = articleQueryService.findFollowArticles(userPrincipal.getId());
-        return new Result<>(articles.size(), articles);
-    }
-
 }

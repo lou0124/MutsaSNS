@@ -19,6 +19,5 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Query("select a from Article a join fetch a.user u where a.user.id =:userId and a.delete = false ")
     List<Article> findByUserId(@Param("userId") Long userId);
 
-
     List<Article> findByUserIn(List<User> users);
 }

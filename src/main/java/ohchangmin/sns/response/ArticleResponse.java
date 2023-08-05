@@ -1,4 +1,4 @@
-package ohchangmin.sns.dto;
+package ohchangmin.sns.response;
 
 import lombok.Data;
 import lombok.Getter;

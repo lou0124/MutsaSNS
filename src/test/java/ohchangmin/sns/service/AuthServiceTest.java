@@ -1,8 +1,8 @@
 package ohchangmin.sns.service;
 
 import ohchangmin.sns.domain.User;
-import ohchangmin.sns.dto.LoginRequest;
-import ohchangmin.sns.dto.SignUpRequest;
+import ohchangmin.sns.request.LoginRequest;
+import ohchangmin.sns.request.SignUpRequest;
 import ohchangmin.sns.exception.MisMatchedPassword;
 import ohchangmin.sns.exception.NotFoundUser;
 import ohchangmin.sns.exception.UsernameAlreadyExists;

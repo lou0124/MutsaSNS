@@ -1,7 +1,7 @@
 package ohchangmin.sns.controller;
 
 import lombok.RequiredArgsConstructor;
-import ohchangmin.sns.dto.UserResponse;
+import ohchangmin.sns.response.UserResponse;
 import ohchangmin.sns.file.FileStore;
 import ohchangmin.sns.service.UserPrincipal;
 import ohchangmin.sns.service.UserService;

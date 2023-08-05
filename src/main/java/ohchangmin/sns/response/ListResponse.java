@@ -1,11 +1,11 @@
-package ohchangmin.sns.controller;
+package ohchangmin.sns.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Result<T> {
+public class ListResponse<T> {
 
     private int count;
 
