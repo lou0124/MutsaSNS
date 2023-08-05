@@ -25,36 +25,31 @@ public class ArticleQueryService {
     public List<ArticleElementResponse> findArticles(Long userId) {
         List<Article> articles = articleRepository.findByUserId(userId);
         List<ArticleImage> articleImages = articleImageRepository.findInArticle(articles);
-
-        List<ArticleElementResponse> responses = createArticleResponse(articles);
-        Map<Long, String> imageUrlMap = createImageUrlMap(articleImages);
-        setRepresentativeImages(responses, imageUrlMap);
-        return responses;
+        return createResponse(articles, articleImages);
     }
 
     public ArticleResponse findArticle(Long articleId) {
         Article article = articleRepository.findByIdWithUser(articleId)
                 .orElseThrow(NotFoundArticle::new);
-
         return new ArticleResponse(article);
     }
 
     public List<ArticleElementResponse> findFollowArticles(Long userId) {
         List<UserFollow> userFollows = userFollowRepository.findByFollowingIdWithFollower(userId);
-        List<User> followers = userFollows.stream()
-                .map(UserFollow::getFollower)
-                .toList();
-
+        List<User> followers = getFollowers(userFollows);
         List<Article> articles = articleRepository.findByUserIn(followers);
         List<ArticleImage> articleImages = articleImageRepository.findInArticle(articles);
+        return createResponse(articles, articleImages);
+    }
 
-        List<ArticleElementResponse> responses = createArticleResponse(articles);
+    private List<ArticleElementResponse> createResponse(List<Article> articles, List<ArticleImage> articleImages) {
+        List<ArticleElementResponse> responses = createArticleElementResponse(articles);
         Map<Long, String> imageUrlMap = createImageUrlMap(articleImages);
         setRepresentativeImages(responses, imageUrlMap);
         return responses;
     }
 
-    private List<ArticleElementResponse> createArticleResponse(List<Article> articles) {
+    private List<ArticleElementResponse> createArticleElementResponse(List<Article> articles) {
         return articles.stream()
                 .map(ArticleElementResponse::new)
                 .toList();
@@ -69,5 +64,11 @@ public class ArticleQueryService {
         articles.forEach(article -> {
             article.setThumbnail(imageUrlMap.get(article.getId()));
         });
+    }
+
+    private List<User> getFollowers(List<UserFollow> userFollows) {
+        return userFollows.stream()
+                .map(UserFollow::getFollower)
+                .toList();
     }
 }
