@@ -26,4 +26,9 @@ public class UserController {
     public UserResponse findUser(@PathVariable Long userId) {
         return userService.findUser(userId);
     }
+
+    @PostMapping("/users/{userId}/follow")
+    public void follow(@AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Long userId) {
+        userService.follow(userPrincipal.getId(), userId);
+    }
 }
