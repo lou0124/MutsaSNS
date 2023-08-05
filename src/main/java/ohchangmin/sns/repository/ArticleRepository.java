@@ -1,6 +1,7 @@
 package ohchangmin.sns.repository;
 
 import ohchangmin.sns.domain.Article;
+import ohchangmin.sns.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +18,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Query("select a from Article a join fetch a.user u where a.user.id =:userId and a.delete = false ")
     List<Article> findByUserId(@Param("userId") Long userId);
+
+
+    List<Article> findByUserIn(List<User> users);
 }

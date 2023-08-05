@@ -60,7 +60,14 @@ public class ArticleController {
 
     @DeleteMapping("/articles/{articleId}")
     public void deleteArticle(@AuthenticationPrincipal UserPrincipal userPrincipal,
-                            @PathVariable Long articleId) {
+                              @PathVariable Long articleId) {
         articleService.deleteArticle(userPrincipal.getId(), articleId);
     }
+
+    @GetMapping("/articles/follow")
+    public Result<List<ArticleElementResponse>> findFollowArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        List<ArticleElementResponse> articles = articleQueryService.findFollowArticles(userPrincipal.getId());
+        return new Result<>(articles.size(), articles);
+    }
+
 }
