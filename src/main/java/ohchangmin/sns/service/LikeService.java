@@ -12,6 +12,8 @@ import ohchangmin.sns.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class LikeService {
@@ -22,6 +24,13 @@ public class LikeService {
 
     @Transactional
     public void pushLike(Long userId, Long articleId) {
+
+        Optional<Like> optionalLike = likeRepository.findByUserIdAndArticleId(userId, articleId);
+        if(optionalLike.isPresent()) {
+            likeRepository.delete(optionalLike.get());
+            return;
+        }
+
         Article article = articleRepository.findByIdWithUser(articleId)
                 .orElseThrow(NotFoundArticle::new);
         article.verifyOtherUser(userId);
@@ -29,7 +38,6 @@ public class LikeService {
         User user = userRepository.findById(userId)
                 .orElseThrow(NotFoundUser::new);
 
-        Like like = Like.createLike(user, article);
-        likeRepository.save(like);
+        likeRepository.save(Like.createLike(user, article));
     }
 }

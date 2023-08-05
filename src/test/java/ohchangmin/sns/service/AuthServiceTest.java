@@ -23,8 +23,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Transactional
 class AuthServiceTest {
 
-    @Autowired
-    AuthService authService;
+    @Autowired AuthService authService;
 
     @Autowired UserRepository userRepository;
 
