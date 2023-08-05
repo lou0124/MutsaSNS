@@ -5,6 +5,7 @@ import ohchangmin.sns.domain.User;
 import ohchangmin.sns.dto.ArticleCreateRequest;
 import ohchangmin.sns.exception.AlreadyDeletedArticle;
 import ohchangmin.sns.exception.MisMatchedUser;
+import ohchangmin.sns.exception.UnauthorizedAccess;
 import ohchangmin.sns.repository.ArticleImageRepository;
 import ohchangmin.sns.repository.ArticleRepository;
 import ohchangmin.sns.repository.UserRepository;
@@ -91,7 +92,7 @@ class ArticleServiceTest {
 
         //when //then
         assertThatThrownBy(() -> articleService.addArticleImages(user.getId() + 1, article.getId(), List.of("이미지경로1", "이미지경로2")))
-                .isInstanceOf(MisMatchedUser.class);
+                .isInstanceOf(UnauthorizedAccess.class);
     }
 
     @DisplayName("피드의 주인은 피드를 삭제할 수 있다.")

@@ -4,6 +4,7 @@ import ohchangmin.sns.domain.Article;
 import ohchangmin.sns.domain.Comment;
 import ohchangmin.sns.domain.User;
 import ohchangmin.sns.exception.MisMatchedUser;
+import ohchangmin.sns.exception.UnauthorizedAccess;
 import ohchangmin.sns.repository.ArticleRepository;
 import ohchangmin.sns.repository.CommentRepository;
 import ohchangmin.sns.repository.UserRepository;
@@ -98,7 +99,7 @@ class CommentServiceTest {
 
         //when //then
         assertThatThrownBy(() -> commentService.modifyComment(user1.getId(), article.getId(), "수정할래요."))
-                .isInstanceOf(MisMatchedUser.class);
+                .isInstanceOf(UnauthorizedAccess.class);
     }
 
 }

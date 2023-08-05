@@ -50,7 +50,7 @@ public class Comment extends BaseTime {
     }
 
     public void verifyUser(Long userId) {
-        if (user.isEqualsId(userId)) {
+        if (!user.isEqualsId(userId)) {
             throw new UnauthorizedAccess("다른 사용자는 해당 댓글의 기능을 사용할 수 없습니다.");
         }
     }
