@@ -9,6 +9,7 @@ import ohchangmin.sns.exception.NotFoundArticle;
 import ohchangmin.sns.exception.NotFoundArticleImage;
 import ohchangmin.sns.repository.ArticleImageRepository;
 import ohchangmin.sns.repository.ArticleRepository;
+import ohchangmin.sns.repository.CommentRepository;
 import ohchangmin.sns.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ public class ArticleService {
     private final UserRepository userRepository;
     private final ArticleRepository articleRepository;
     private final ArticleImageRepository articleImageRepository;
+    private final CommentRepository commentRepository;
 
     public void uploadArticle(Long userId, ArticleCreateRequest request) {
         User user = userRepository.findByIdOrThrow(userId);
@@ -55,6 +57,7 @@ public class ArticleService {
 
         article.verifyUser(userId);
         article.delete();
+        commentRepository.updateDeleteByArticleId(articleId);
     }
 
     private List<ArticleImage> createArticleImages(List<String> imageUrls) {
@@ -62,5 +65,4 @@ public class ArticleService {
                 .map(ArticleImage::new)
                 .toList();
     }
-
 }

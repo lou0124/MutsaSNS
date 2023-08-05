@@ -5,6 +5,7 @@ import ohchangmin.sns.domain.User;
 import ohchangmin.sns.dto.ArticleCreateRequest;
 import ohchangmin.sns.exception.AlreadyDeletedArticle;
 import ohchangmin.sns.exception.MisMatchedUser;
+import ohchangmin.sns.exception.NotFoundArticle;
 import ohchangmin.sns.exception.UnauthorizedAccess;
 import ohchangmin.sns.repository.ArticleImageRepository;
 import ohchangmin.sns.repository.ArticleRepository;
@@ -130,6 +131,6 @@ class ArticleServiceTest {
 
         //when //then
         assertThatThrownBy(() -> articleService.deleteArticle(user.getId(), article.getId()))
-                .isInstanceOf(AlreadyDeletedArticle.class);
+                .isInstanceOf(NotFoundArticle.class);
     }
 }
