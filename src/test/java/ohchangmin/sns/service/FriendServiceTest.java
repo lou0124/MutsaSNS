@@ -47,8 +47,8 @@ class FriendServiceTest {
         List<UserFriend> all = userFriendRepository.findAll();
         assertThat(all.size()).isEqualTo(1);
         assertThat(all.get(0))
-                .extracting("from", "to")
-                .contains(user1, user2);
+                .extracting("from", "to", "request")
+                .contains(user1, user2, true);
     }
 
     @DisplayName("사용자는 친구 요청을 수락 할 수 있다.")
@@ -68,6 +68,7 @@ class FriendServiceTest {
         UserFriend userFriend = UserFriend.builder()
                 .from(user1)
                 .to(user2)
+                .request(true)
                 .build();
         userFriendRepository.save(userFriend);
 
@@ -79,6 +80,8 @@ class FriendServiceTest {
         assertThat(all.size()).isEqualTo(2);
         assertThat(all.get(0).getTo()).isEqualTo(all.get(1).getFrom());
         assertThat(all.get(1).getTo()).isEqualTo(all.get(0).getFrom());
+        assertThat(all.get(0).isRequest()).isFalse();
+        assertThat(all.get(1).isRequest()).isFalse();
     }
 
     @DisplayName("사용자는 친구 요청을 거절 할 수 있다.")
@@ -98,6 +101,7 @@ class FriendServiceTest {
         UserFriend userFriend = UserFriend.builder()
                 .from(user1)
                 .to(user2)
+                .request(true)
                 .build();
         userFriendRepository.save(userFriend);
 

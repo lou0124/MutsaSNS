@@ -29,11 +29,11 @@ public class FriendService {
 
         User from = userRepository.findByIdOrThrow(fromId);
         User to = userRepository.findByIdOrThrow(toId);
-        saveUserFriend(from, to);
+        saveUserFriend(from, to, true);
     }
 
     public List<FriendRequestElement> findRequestFriends(Long userId) {
-        List<UserFriend> userFriends = userFriendRepository.findAllToId(userId);
+        List<UserFriend> userFriends = userFriendRepository.findRequests(userId);
         return createFriendRequestElement(userFriends);
     }
 
@@ -42,7 +42,8 @@ public class FriendService {
         UserFriend friendRequest = userFriendRepository.findByIdWithUsers(requestId)
                 .orElseThrow(NotFoundUserFriend::new);
         friendRequest.verifyUser(userId);
-        saveUserFriend(friendRequest.getTo(), friendRequest.getFrom());
+        friendRequest.accept();
+        saveUserFriend(friendRequest.getTo(), friendRequest.getFrom(), false);
     }
 
     @Transactional
@@ -59,10 +60,11 @@ public class FriendService {
                 .toList();
     }
 
-    private void saveUserFriend(User from, User to) {
+    private void saveUserFriend(User from, User to, boolean request) {
         UserFriend userFriend = UserFriend.builder()
                 .from(from)
                 .to(to)
+                .request(request)
                 .build();
         userFriendRepository.save(userFriend);
     }

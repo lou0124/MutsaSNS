@@ -12,9 +12,9 @@ import java.util.Optional;
 @Repository
 public interface UserFriendRepository extends JpaRepository<UserFriend, Long> {
 
-    @Query("select uf from UserFriend uf join fetch uf.from f where uf.to.id = :toId")
-    List<UserFriend> findAllToId(@Param("toId") Long toId);
+    @Query("select uf from UserFriend uf join fetch uf.from f where uf.to.id = :toId and uf.request = true ")
+    List<UserFriend> findRequests(@Param("toId") Long toId);
 
-    @Query("select uf from UserFriend uf join fetch uf.from f1 join fetch uf.to f2 where uf.id = :userFriendId")
+    @Query("select uf from UserFriend uf join fetch uf.from f1 join fetch uf.to f2 where uf.id = :userFriendId and uf.request = true ")
     Optional<UserFriend> findByIdWithUsers(@Param("userFriendId") Long userFriendId);
 }

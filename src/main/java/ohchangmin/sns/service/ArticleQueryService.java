@@ -21,6 +21,7 @@ public class ArticleQueryService {
     private final ArticleRepository articleRepository;
     private final ArticleImageRepository articleImageRepository;
     private final UserFollowRepository userFollowRepository;
+    private final UserFriendRepository userFriendRepository;
 
     public List<ArticleElement> findArticles(Long userId) {
         List<Article> articles = articleRepository.findByUserId(userId);
@@ -41,6 +42,10 @@ public class ArticleQueryService {
         List<ArticleImage> articleImages = articleImageRepository.findInArticle(articles);
         return createResponse(articles, articleImages);
     }
+
+//    public List<ArticleElement> findFriendsArticles(Long userId) {
+//        userFriendRepository
+//    }
 
     private List<ArticleElement> createResponse(List<Article> articles, List<ArticleImage> articleImages) {
         List<ArticleElement> articleElements = createArticleElement(articles);

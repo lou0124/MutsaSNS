@@ -35,4 +35,10 @@ public class ArticleQueryController {
         List<ArticleElement> articles = articleQueryService.findFollowArticles(userPrincipal.getId());
         return new ListResponse<>(articles.size(), articles);
     }
+
+//    @GetMapping("/articles/friends")
+//    public ListResponse<List<ArticleElement>> findFriendsArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+//        List<ArticleElement> articles = articleQueryService.findFriendsArticles(userPrincipal.getId());
+//        return new ListResponse<>(articles.size(), articles);
+//    }
 }

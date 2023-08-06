@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ohchangmin.sns.exception.AlreadyAccepted;
 import ohchangmin.sns.exception.UnauthorizedAccess;
 
 @Getter
@@ -23,10 +24,20 @@ public class UserFriend {
     @JoinColumn(name = "to_id")
     private User to;
 
+    private boolean request;
+
     @Builder
-    private UserFriend(User from, User to) {
+    private UserFriend(User from, User to, boolean request) {
         this.from = from;
         this.to = to;
+        this.request = request;
+    }
+
+    public void accept() {
+        if (!request) {
+            throw new AlreadyAccepted();
+        }
+        this.request = false;
     }
 
     public String getFromUsername() {
