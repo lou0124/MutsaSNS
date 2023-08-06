@@ -1,7 +1,7 @@
 package ohchangmin.sns.controller;
 
 import lombok.RequiredArgsConstructor;
-import ohchangmin.sns.response.ArticleElementResponse;
+import ohchangmin.sns.response.ArticleElement;
 import ohchangmin.sns.response.ArticleResponse;
 import ohchangmin.sns.response.ListResponse;
 import ohchangmin.sns.service.ArticleQueryService;
@@ -20,8 +20,8 @@ public class ArticleQueryController {
     private final ArticleQueryService articleQueryService;
 
     @GetMapping("/users/{userId}/articles")
-    public ListResponse<List<ArticleElementResponse>> findArticles(@PathVariable Long userId) {
-        List<ArticleElementResponse> articles = articleQueryService.findArticles(userId);
+    public ListResponse<List<ArticleElement>> findArticles(@PathVariable Long userId) {
+        List<ArticleElement> articles = articleQueryService.findArticles(userId);
         return new ListResponse<>(articles.size(), articles);
     }
 
@@ -31,8 +31,8 @@ public class ArticleQueryController {
     }
 
     @GetMapping("/articles/follow")
-    public ListResponse<List<ArticleElementResponse>> findFollowArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        List<ArticleElementResponse> articles = articleQueryService.findFollowArticles(userPrincipal.getId());
+    public ListResponse<List<ArticleElement>> findFollowArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        List<ArticleElement> articles = articleQueryService.findFollowArticles(userPrincipal.getId());
         return new ListResponse<>(articles.size(), articles);
     }
 }

@@ -6,7 +6,7 @@ import ohchangmin.sns.domain.Article;
 import java.util.Objects;
 
 @Getter
-public class ArticleElementResponse {
+public class ArticleElement {
 
     private final Long id;
 
@@ -16,7 +16,7 @@ public class ArticleElementResponse {
 
     private String thumbnail;
 
-    public ArticleElementResponse(Article article) {
+    public ArticleElement(Article article) {
         this.id = article.getId();
         this.username = article.getUsername();
         this.title = article.getTitle();

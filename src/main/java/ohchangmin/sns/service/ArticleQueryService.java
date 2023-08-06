@@ -2,7 +2,7 @@ package ohchangmin.sns.service;
 
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.*;
-import ohchangmin.sns.response.ArticleElementResponse;
+import ohchangmin.sns.response.ArticleElement;
 import ohchangmin.sns.response.ArticleResponse;
 import ohchangmin.sns.exception.NotFoundArticle;
 import ohchangmin.sns.repository.*;
@@ -22,7 +22,7 @@ public class ArticleQueryService {
     private final ArticleImageRepository articleImageRepository;
     private final UserFollowRepository userFollowRepository;
 
-    public List<ArticleElementResponse> findArticles(Long userId) {
+    public List<ArticleElement> findArticles(Long userId) {
         List<Article> articles = articleRepository.findByUserId(userId);
         List<ArticleImage> articleImages = articleImageRepository.findInArticle(articles);
         return createResponse(articles, articleImages);
@@ -34,7 +34,8 @@ public class ArticleQueryService {
         return new ArticleResponse(article);
     }
 
-    public List<ArticleElementResponse> findFollowArticles(Long userId) {
+    //TODO 역순 조회 구현
+    public List<ArticleElement> findFollowArticles(Long userId) {
         List<UserFollow> userFollows = userFollowRepository.findByFollowingIdWithFollower(userId);
         List<User> followers = getFollowers(userFollows);
         List<Article> articles = articleRepository.findByUserIn(followers);
@@ -42,16 +43,16 @@ public class ArticleQueryService {
         return createResponse(articles, articleImages);
     }
 
-    private List<ArticleElementResponse> createResponse(List<Article> articles, List<ArticleImage> articleImages) {
-        List<ArticleElementResponse> responses = createArticleElementResponse(articles);
+    private List<ArticleElement> createResponse(List<Article> articles, List<ArticleImage> articleImages) {
+        List<ArticleElement> articleElements = createArticleElement(articles);
         Map<Long, String> imageUrlMap = createImageUrlMap(articleImages);
-        setRepresentativeImages(responses, imageUrlMap);
-        return responses;
+        setRepresentativeImages(articleElements, imageUrlMap);
+        return articleElements;
     }
 
-    private List<ArticleElementResponse> createArticleElementResponse(List<Article> articles) {
+    private List<ArticleElement> createArticleElement(List<Article> articles) {
         return articles.stream()
-                .map(ArticleElementResponse::new)
+                .map(ArticleElement::new)
                 .toList();
     }
 
@@ -60,7 +61,7 @@ public class ArticleQueryService {
                 .collect(Collectors.toMap(ArticleImage::getArticleId, ArticleImage::getImageUrl));
     }
 
-    private void setRepresentativeImages(List<ArticleElementResponse> articles, Map<Long, String> imageUrlMap) {
+    private void setRepresentativeImages(List<ArticleElement> articles, Map<Long, String> imageUrlMap) {
         articles.forEach(article -> {
             article.setThumbnail(imageUrlMap.get(article.getId()));
         });
