@@ -57,6 +57,10 @@ public class UserService {
 
     @Transactional
     public void requestFriends(Long fromId, Long toId) {
+        if (fromId.equals(toId)) {
+            throw new NotAllowFollowSelf();
+        }
+
         User from = userRepository.findByIdOrThrow(fromId);
         User to = userRepository.findByIdOrThrow(toId);
         UserFriend userFriend = UserFriend.builder()
