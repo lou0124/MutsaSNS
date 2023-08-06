@@ -34,11 +34,10 @@ public class ArticleQueryService {
         return new ArticleResponse(article);
     }
 
-    //TODO 역순 조회 구현
     public List<ArticleElement> findFollowArticles(Long userId) {
         List<UserFollow> userFollows = userFollowRepository.findByFollowingIdWithFollower(userId);
         List<User> followers = getFollowers(userFollows);
-        List<Article> articles = articleRepository.findByUserIn(followers);
+        List<Article> articles = articleRepository.findByUserInOrderByCreatedDateDesc(followers);
         List<ArticleImage> articleImages = articleImageRepository.findInArticle(articles);
         return createResponse(articles, articleImages);
     }
