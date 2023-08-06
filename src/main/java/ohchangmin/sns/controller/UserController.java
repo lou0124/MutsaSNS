@@ -42,13 +42,23 @@ public class UserController {
     }
 
     @PostMapping("/users/{userId}/friend-requests")
-    public void requestFriends(@AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Long userId) {
+    public void requestFriend(@AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Long userId) {
         userService.requestFriends(userPrincipal.getId(), userId);
     }
 
     @GetMapping("/friend-requests")
-    public ListResponse<List<FriendRequestElement>> findRequestFriends(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+    public ListResponse<List<FriendRequestElement>> findRequestFriend(@AuthenticationPrincipal UserPrincipal userPrincipal) {
         List<FriendRequestElement> friendRequestElements = userService.findRequestFriends(userPrincipal.getId());
         return new ListResponse<>(friendRequestElements.size(), friendRequestElements);
+    }
+
+    @PostMapping("/friend-requests/{requestId}/accept")
+    public void requestFriendAccept(@AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Long requestId) {
+        userService.requestFriendAccept(userPrincipal.getId(), requestId);
+    }
+
+    @PostMapping("/friend-requests/{requestId}/reject")
+    public void requestFriendReject(@AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Long requestId) {
+//        userService.findRequestFriends(userPrincipal.getId());
     }
 }

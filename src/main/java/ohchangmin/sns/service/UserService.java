@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.User;
 import ohchangmin.sns.domain.UserFollow;
 import ohchangmin.sns.domain.UserFriend;
+import ohchangmin.sns.exception.NotFoundUserFriend;
 import ohchangmin.sns.repository.UserFriendRepository;
 import ohchangmin.sns.response.FriendRequestElement;
 import ohchangmin.sns.response.UserResponse;
@@ -63,11 +64,7 @@ public class UserService {
 
         User from = userRepository.findByIdOrThrow(fromId);
         User to = userRepository.findByIdOrThrow(toId);
-        UserFriend userFriend = UserFriend.builder()
-                .from(from)
-                .to(to)
-                .build();
-        userFriendRepository.save(userFriend);
+        saveUserFriend(from, to);
     }
 
     public List<FriendRequestElement> findRequestFriends(Long userId) {
@@ -79,5 +76,21 @@ public class UserService {
         return userFriends.stream()
                 .map(FriendRequestElement::new)
                 .toList();
+    }
+
+    @Transactional
+    public void requestFriendAccept(Long userId, Long requestId) {
+        UserFriend friendRequest = userFriendRepository.findByIdWithUsers(requestId)
+                .orElseThrow(NotFoundUserFriend::new);
+        friendRequest.verifyUser(userId);
+        saveUserFriend(friendRequest.getTo(), friendRequest.getFrom());
+    }
+
+    private void saveUserFriend(User from, User to) {
+        UserFriend userFriend = UserFriend.builder()
+                .from(from)
+                .to(to)
+                .build();
+        userFriendRepository.save(userFriend);
     }
 }
