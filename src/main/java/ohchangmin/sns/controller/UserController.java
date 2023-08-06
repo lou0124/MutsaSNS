@@ -59,6 +59,6 @@ public class UserController {
 
     @PostMapping("/friend-requests/{requestId}/reject")
     public void requestFriendReject(@AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Long requestId) {
-//        userService.findRequestFriends(userPrincipal.getId());
+        userService.requestFriendReject(userPrincipal.getId(), requestId);
     }
 }

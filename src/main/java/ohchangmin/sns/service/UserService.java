@@ -86,6 +86,14 @@ public class UserService {
         saveUserFriend(friendRequest.getTo(), friendRequest.getFrom());
     }
 
+    @Transactional
+    public void requestFriendReject(Long userId, Long requestId) {
+        UserFriend friendRequest = userFriendRepository.findByIdWithUsers(requestId)
+                .orElseThrow(NotFoundUserFriend::new);
+        friendRequest.verifyUser(userId);
+        userFriendRepository.delete(friendRequest);
+    }
+
     private void saveUserFriend(User from, User to) {
         UserFriend userFriend = UserFriend.builder()
                 .from(from)
