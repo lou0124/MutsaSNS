@@ -2,20 +2,10 @@ package ohchangmin.sns.service;
 
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.User;
-import ohchangmin.sns.domain.UserFollow;
-import ohchangmin.sns.domain.UserFriend;
-import ohchangmin.sns.exception.NotFoundUserFriend;
-import ohchangmin.sns.repository.UserFriendRepository;
-import ohchangmin.sns.response.FriendRequestElement;
-import ohchangmin.sns.response.UserResponse;
-import ohchangmin.sns.exception.NotAllowFollowSelf;
-import ohchangmin.sns.exception.NotFoundUserFollow;
-import ohchangmin.sns.repository.UserFollowRepository;
 import ohchangmin.sns.repository.UserRepository;
+import ohchangmin.sns.response.UserResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,8 +13,6 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserFollowRepository userFollowRepository;
-    private final UserFriendRepository userFriendRepository;
 
     @Transactional
     public void changeProfile(Long userId, String profileImage) {
@@ -35,70 +23,5 @@ public class UserService {
     public UserResponse findUser(Long userId) {
         User user = userRepository.findByIdOrThrow(userId);
         return new UserResponse(user);
-    }
-
-    @Transactional
-    public void follow(Long followingId, Long followerId) {
-        if (followingId.equals(followerId)) {
-            throw new NotAllowFollowSelf();
-        }
-
-        User following = userRepository.findByIdOrThrow(followingId);
-        User follower = userRepository.findByIdOrThrow(followerId);
-        UserFollow userFollow = UserFollow.createFollow(following, follower);
-        userFollowRepository.save(userFollow);
-    }
-
-    @Transactional
-    public void unfollow(Long followingId, Long followerId) {
-        UserFollow userFollow = userFollowRepository.findByFollowingIdAndFollowerId(followingId, followerId)
-                .orElseThrow(NotFoundUserFollow::new);
-        userFollowRepository.delete(userFollow);
-    }
-
-    @Transactional
-    public void requestFriends(Long fromId, Long toId) {
-        if (fromId.equals(toId)) {
-            throw new NotAllowFollowSelf();
-        }
-
-        User from = userRepository.findByIdOrThrow(fromId);
-        User to = userRepository.findByIdOrThrow(toId);
-        saveUserFriend(from, to);
-    }
-
-    public List<FriendRequestElement> findRequestFriends(Long userId) {
-        List<UserFriend> userFriends = userFriendRepository.findAllToId(userId);
-        return createFriendRequestElement(userFriends);
-    }
-
-    private List<FriendRequestElement> createFriendRequestElement(List<UserFriend> userFriends) {
-        return userFriends.stream()
-                .map(FriendRequestElement::new)
-                .toList();
-    }
-
-    @Transactional
-    public void requestFriendAccept(Long userId, Long requestId) {
-        UserFriend friendRequest = userFriendRepository.findByIdWithUsers(requestId)
-                .orElseThrow(NotFoundUserFriend::new);
-        friendRequest.verifyUser(userId);
-        saveUserFriend(friendRequest.getTo(), friendRequest.getFrom());
-    }
-
-    @Transactional
-    public void requestFriendReject(Long userId, Long requestId) {
-        UserFriend friendRequest = userFriendRepository.findByIdWithUsers(requestId)
-                .orElseThrow(NotFoundUserFriend::new);
-        friendRequest.verifyUser(userId);
-        userFriendRepository.delete(friendRequest);
-    }
-
-    private void saveUserFriend(User from, User to) {
-        UserFriend userFriend = UserFriend.builder()
-                .from(from)
-                .to(to)
-                .build();
-        userFriendRepository.save(userFriend);
     }
 }

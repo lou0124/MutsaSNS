@@ -14,7 +14,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-@Profile("local")
+@Profile("localz")
 @Component
 @RequiredArgsConstructor
 public class TestDataInit {
