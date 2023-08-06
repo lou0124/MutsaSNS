@@ -30,15 +30,15 @@ public class ArticleQueryController {
         return articleQueryService.findArticle(articleId);
     }
 
-    @GetMapping("/articles/follow")
+    @GetMapping("/articles/follows")
     public ListResponse<List<ArticleElement>> findFollowArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-        List<ArticleElement> articles = articleQueryService.findFollowArticles(userPrincipal.getId());
+        List<ArticleElement> articles = articleQueryService.findFollowersArticles(userPrincipal.getId());
         return new ListResponse<>(articles.size(), articles);
     }
 
-//    @GetMapping("/articles/friends")
-//    public ListResponse<List<ArticleElement>> findFriendsArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
-//        List<ArticleElement> articles = articleQueryService.findFriendsArticles(userPrincipal.getId());
-//        return new ListResponse<>(articles.size(), articles);
-//    }
+    @GetMapping("/articles/friends")
+    public ListResponse<List<ArticleElement>> findFriendsArticles(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+        List<ArticleElement> articles = articleQueryService.findFriendsArticles(userPrincipal.getId());
+        return new ListResponse<>(articles.size(), articles);
+    }
 }
