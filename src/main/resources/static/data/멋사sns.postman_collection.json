@@ -171,7 +171,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"타이틀 입니다.\",\n    \"content\": \"콘텐츠 입니다.\"\n}",
+							"raw": "{\n    \"title\": \"타이틀 입니다.\",\n    \"content\": \"콘텐츠 입니다!\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
