@@ -38,8 +38,6 @@ h2 `2.1.214`
 
 ## postman_collection
 
-[API 문서](https://documenter.getpostman.com/view/26447331/2s9YC5yYPy)
-
 [postman_collection](src%2Fmain%2Fresources%2Fstatic%2Fdata%2F%EB%A9%8B%EC%82%ACsns.postman_collection.json)
 
 <br/>
