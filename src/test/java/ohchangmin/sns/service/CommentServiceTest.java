@@ -73,7 +73,7 @@ class CommentServiceTest {
         commentRepository.save(comment);
 
         //when
-        commentService.modifyComment(user2.getId(), article.getId(), "수정할래요.");
+        commentService.modifyComment(user2.getId(), comment.getId(), "수정할래요.");
 
         //then
         Comment findComment = commentRepository.findById(comment.getId()).get();

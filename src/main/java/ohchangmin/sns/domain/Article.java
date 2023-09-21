@@ -7,11 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ohchangmin.sns.exception.AlreadyDeletedArticle;
 import ohchangmin.sns.exception.UnauthorizedAccess;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@SQLDelete(sql = "UPDATE article SET deleted_at = current_timestamp WHERE article_id = ?")
+@Where(clause = "deleted_at is null")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -39,15 +43,12 @@ public class Article extends BaseTime {
     @Lob
     private String content;
 
-    private boolean delete;
-
     private LocalDateTime deletedAt;
 
     @Builder
     private Article(String title, String content) {
         this.title = title;
         this.content = content;
-        this.delete = false;
     }
 
     public void setUser(User user) {
@@ -74,13 +75,12 @@ public class Article extends BaseTime {
         return this.likes.size();
     }
 
-    public void delete() {
-        if (delete) {
-            throw new AlreadyDeletedArticle();
-        }
-        delete = true;
-        deletedAt = LocalDateTime.now();
-    }
+//    public void delete() {
+//        if (deletedAt != null) {
+//            throw new AlreadyDeletedArticle();
+//        }
+//        deletedAt = LocalDateTime.now();
+//    }
 
     public void addImages(List<ArticleImage> articleImages) {
         articleImages.forEach(articleImage -> {

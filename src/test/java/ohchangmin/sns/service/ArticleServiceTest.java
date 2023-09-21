@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -109,9 +110,8 @@ class ArticleServiceTest {
         articleService.deleteArticle(user.getId(), article.getId());
 
         //then
-        Article findArticle = articleRepository.findById(article.getId()).get();
-        assertThat(findArticle.isDelete()).isTrue();
-        assertThat(findArticle.getDeletedAt()).isNotNull();
+        Optional<Article> optionalArticle = articleRepository.findById(article.getId());
+        assertThat(optionalArticle).isEmpty();
     }
 
     @DisplayName("이미 삭제된 피드를 삭제할 시 예외가 발생한다.")
@@ -123,9 +123,9 @@ class ArticleServiceTest {
 
         Article article = Article.builder().title("제목 입니다.").content("내용 입니다.").build();
         article.setUser(user);
-        article.delete();
 
         articleRepository.save(article);
+        articleRepository.delete(article);
 
         //when //then
         assertThatThrownBy(() -> articleService.deleteArticle(user.getId(), article.getId()))

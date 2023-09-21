@@ -56,7 +56,7 @@ public class ArticleService {
                 .orElseThrow(NotFoundArticle::new);
 
         article.verifyUser(userId);
-        article.delete();
+        articleRepository.delete(article);
         commentRepository.updateDeleteByArticleId(articleId);
     }
 

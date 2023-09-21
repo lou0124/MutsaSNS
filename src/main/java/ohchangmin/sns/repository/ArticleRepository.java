@@ -13,10 +13,10 @@ import java.util.Optional;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    @Query("select a from Article a join fetch a.user u where a.id = :articleId and a.delete = false ")
+    @Query("select a from Article a join fetch a.user u where a.id = :articleId")
     Optional<Article> findByIdWithUser(@Param("articleId") Long articleId);
 
-    @Query("select a from Article a join fetch a.user u where a.user.id =:userId and a.delete = false ")
+    @Query("select a from Article a join fetch a.user u where a.user.id =:userId")
     List<Article> findByUserId(@Param("userId") Long userId);
 
     List<Article> findByUserInOrderByCreatedDateDesc(List<User> users);
