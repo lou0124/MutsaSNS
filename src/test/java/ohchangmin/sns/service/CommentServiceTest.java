@@ -98,7 +98,7 @@ class CommentServiceTest {
         commentRepository.save(comment);
 
         //when //then
-        assertThatThrownBy(() -> commentService.modifyComment(user1.getId(), article.getId(), "수정할래요."))
+        assertThatThrownBy(() -> commentService.modifyComment(user1.getId(), comment.getId(), "수정할래요."))
                 .isInstanceOf(UnauthorizedAccess.class);
     }
 
