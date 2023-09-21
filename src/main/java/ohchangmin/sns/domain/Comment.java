@@ -5,13 +5,9 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ohchangmin.sns.exception.AlreadyDeletedArticle;
-import ohchangmin.sns.exception.AlreadyDeletedComment;
 import ohchangmin.sns.exception.UnauthorizedAccess;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-
-import java.time.LocalDateTime;
 
 @SQLDelete(sql = "UPDATE comment SET deleted = true WHERE comment_id = ?")
 @Where(clause = "deleted is false")

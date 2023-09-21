@@ -13,7 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
@@ -21,8 +22,7 @@ class FollowServiceTest {
 
     @Autowired UserRepository userRepository;
     @Autowired UserFollowRepository userFollowRepository;
-    @Autowired
-    FollowService followService;
+    @Autowired FollowService followService;
 
     @DisplayName("로그인 한 사용자는 다른 사람을 팔로우 할 수 있다.")
     @Test

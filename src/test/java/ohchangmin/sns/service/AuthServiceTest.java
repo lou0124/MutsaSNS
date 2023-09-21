@@ -1,12 +1,12 @@
 package ohchangmin.sns.service;
 
 import ohchangmin.sns.domain.User;
-import ohchangmin.sns.request.LoginRequest;
-import ohchangmin.sns.request.SignUpRequest;
 import ohchangmin.sns.exception.MisMatchedPassword;
 import ohchangmin.sns.exception.NotFoundUser;
 import ohchangmin.sns.exception.UsernameAlreadyExists;
 import ohchangmin.sns.repository.UserRepository;
+import ohchangmin.sns.request.LoginRequest;
+import ohchangmin.sns.request.SignUpRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +24,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class AuthServiceTest {
 
     @Autowired AuthService authService;
-
     @Autowired UserRepository userRepository;
-
     @Autowired PasswordEncoder passwordEncoder;
 
     @DisplayName("회원가입시 회원등록이 된다.")

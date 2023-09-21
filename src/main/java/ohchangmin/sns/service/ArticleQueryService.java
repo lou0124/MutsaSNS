@@ -2,10 +2,13 @@ package ohchangmin.sns.service;
 
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.*;
+import ohchangmin.sns.exception.NotFoundArticle;
+import ohchangmin.sns.repository.ArticleImageRepository;
+import ohchangmin.sns.repository.ArticleRepository;
+import ohchangmin.sns.repository.UserFollowRepository;
+import ohchangmin.sns.repository.UserFriendRepository;
 import ohchangmin.sns.response.ArticleElement;
 import ohchangmin.sns.response.ArticleResponse;
-import ohchangmin.sns.exception.NotFoundArticle;
-import ohchangmin.sns.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

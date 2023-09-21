@@ -8,7 +8,6 @@ import ohchangmin.sns.exception.UnauthorizedAccess;
 import ohchangmin.sns.repository.ArticleRepository;
 import ohchangmin.sns.repository.LikeRepository;
 import ohchangmin.sns.repository.UserRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +16,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
 class LikeServiceTest {
 
     @Autowired UserRepository userRepository;
-
     @Autowired ArticleRepository articleRepository;
-
     @Autowired LikeService likeService;
-
     @Autowired LikeRepository likeRepository;
-
     @Autowired EntityManager em;
 
     @DisplayName("로그인한 사용자는 본인이 아닌 피드에 좋아요를 누를 수 있다.")

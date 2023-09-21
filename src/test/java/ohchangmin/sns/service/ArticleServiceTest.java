@@ -4,13 +4,13 @@ import jakarta.persistence.EntityManager;
 import ohchangmin.sns.domain.Article;
 import ohchangmin.sns.domain.Comment;
 import ohchangmin.sns.domain.User;
-import ohchangmin.sns.repository.CommentRepository;
-import ohchangmin.sns.request.ArticleCreateRequest;
 import ohchangmin.sns.exception.NotFoundArticle;
 import ohchangmin.sns.exception.UnauthorizedAccess;
 import ohchangmin.sns.repository.ArticleImageRepository;
 import ohchangmin.sns.repository.ArticleRepository;
+import ohchangmin.sns.repository.CommentRepository;
 import ohchangmin.sns.repository.UserRepository;
+import ohchangmin.sns.request.ArticleCreateRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,23 +27,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Transactional
 class ArticleServiceTest {
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    ArticleService articleService;
-
-    @Autowired
-    ArticleRepository articleRepository;
-
-    @Autowired
-    ArticleImageRepository articleImageRepository;
-
-    @Autowired
-    CommentRepository commentRepository;
-
-    @Autowired
-    EntityManager em;
+    @Autowired UserRepository userRepository;
+    @Autowired ArticleService articleService;
+    @Autowired ArticleRepository articleRepository;
+    @Autowired ArticleImageRepository articleImageRepository;
+    @Autowired CommentRepository commentRepository;
+    @Autowired EntityManager em;
 
     @DisplayName("로그인한 유저는 피드를 등록할 수 있다.")
     @Test

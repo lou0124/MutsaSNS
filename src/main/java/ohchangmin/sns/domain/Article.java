@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ohchangmin.sns.exception.AlreadyDeletedArticle;
 import ohchangmin.sns.exception.UnauthorizedAccess;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;

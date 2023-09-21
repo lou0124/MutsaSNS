@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ohchangmin.sns.exception.MisMatchedUser;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,6 @@ package ohchangmin.sns.service;
 import ohchangmin.sns.domain.Article;
 import ohchangmin.sns.domain.Comment;
 import ohchangmin.sns.domain.User;
-import ohchangmin.sns.exception.MisMatchedUser;
 import ohchangmin.sns.exception.UnauthorizedAccess;
 import ohchangmin.sns.repository.ArticleRepository;
 import ohchangmin.sns.repository.CommentRepository;
@@ -16,18 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
 class CommentServiceTest {
 
     @Autowired UserRepository userRepository;
-
     @Autowired ArticleRepository articleRepository;
-
     @Autowired CommentService commentService;
-
     @Autowired CommentRepository commentRepository;
 
     @DisplayName("로그인한 유저는 피드에 댓글을 달 수 있다.")

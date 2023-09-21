@@ -1,6 +1,5 @@
 package ohchangmin.sns.service;
 
-import lombok.extern.java.Log;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.List;

@@ -12,17 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
 class FriendServiceTest {
 
     @Autowired UserRepository userRepository;
-
-    @Autowired
-    FriendService friendService;
-
+    @Autowired FriendService friendService;
     @Autowired UserFriendRepository userFriendRepository;
 
     @DisplayName("로그인 한 사용자는 친구 요청을 할 수 있다.")
