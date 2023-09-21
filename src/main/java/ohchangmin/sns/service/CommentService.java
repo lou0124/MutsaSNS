@@ -48,6 +48,6 @@ public class CommentService {
                 .orElseThrow(NotFoundComment::new);
 
         comment.verifyUser(userId);
-        comment.delete();
+        commentRepository.delete(comment);
     }
 }

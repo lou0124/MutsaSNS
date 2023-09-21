@@ -75,13 +75,6 @@ public class Article extends BaseTime {
         return this.likes.size();
     }
 
-//    public void delete() {
-//        if (deletedAt != null) {
-//            throw new AlreadyDeletedArticle();
-//        }
-//        deletedAt = LocalDateTime.now();
-//    }
-
     public void addImages(List<ArticleImage> articleImages) {
         articleImages.forEach(articleImage -> {
             this.articleImages.add(articleImage);

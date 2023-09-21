@@ -8,9 +8,13 @@ import lombok.NoArgsConstructor;
 import ohchangmin.sns.exception.AlreadyDeletedArticle;
 import ohchangmin.sns.exception.AlreadyDeletedComment;
 import ohchangmin.sns.exception.UnauthorizedAccess;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDateTime;
 
+@SQLDelete(sql = "UPDATE comment SET deleted = true WHERE comment_id = ?")
+@Where(clause = "deleted is false")
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,7 +35,7 @@ public class Comment extends BaseTime {
     @Lob
     private String content;
 
-    private boolean delete;
+    private boolean deleted = false;
 
     public String getUsername() {
         return user.getUsername();
@@ -63,12 +67,5 @@ public class Comment extends BaseTime {
 
     public void modify(String content) {
         this.content = content;
-    }
-
-    public void delete(){
-        if (delete) {
-            throw new AlreadyDeletedComment();
-        }
-        delete = true;
     }
 }

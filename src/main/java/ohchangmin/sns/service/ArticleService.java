@@ -57,7 +57,7 @@ public class ArticleService {
 
         article.verifyUser(userId);
         articleRepository.delete(article);
-        commentRepository.updateDeleteByArticleId(articleId);
+        commentRepository.updateDeletedByArticleId(articleId);
     }
 
     private List<ArticleImage> createArticleImages(List<String> imageUrls) {

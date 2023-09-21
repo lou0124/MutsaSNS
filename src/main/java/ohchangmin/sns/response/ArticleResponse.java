@@ -35,7 +35,7 @@ public class ArticleResponse {
                 .map(ArticleImageResponse::new)
                 .toList();
         this.comments = article.getComments().stream()
-                .filter(comment -> !comment.isDelete())
+                .filter(comment -> !comment.isDeleted())
                 .map(CommentResponse::new)
                 .toList();
     }

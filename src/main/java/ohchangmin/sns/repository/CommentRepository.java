@@ -12,10 +12,10 @@ import java.util.Optional;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    @Query("select c from Comment c join fetch c.user u where c.id =:commentId and c.delete = false ")
+    @Query("select c from Comment c join fetch c.user u where c.id =:commentId")
     Optional<Comment> findByIdWithUser(@Param("commentId") Long commentId);
 
     @Modifying
-    @Query("update Comment c set c.delete = true where c.article.id = :articleId")
-    void updateDeleteByArticleId(@Param("articleId") Long articleId);
+    @Query("update Comment c set c.deleted = true where c.article.id = :articleId")
+    void updateDeletedByArticleId(@Param("articleId") Long articleId);
 }

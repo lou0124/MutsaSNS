@@ -1,7 +1,10 @@
 package ohchangmin.sns.service;
 
+import jakarta.persistence.EntityManager;
 import ohchangmin.sns.domain.Article;
+import ohchangmin.sns.domain.Comment;
 import ohchangmin.sns.domain.User;
+import ohchangmin.sns.repository.CommentRepository;
 import ohchangmin.sns.request.ArticleCreateRequest;
 import ohchangmin.sns.exception.NotFoundArticle;
 import ohchangmin.sns.exception.UnauthorizedAccess;
@@ -35,6 +38,12 @@ class ArticleServiceTest {
 
     @Autowired
     ArticleImageRepository articleImageRepository;
+
+    @Autowired
+    CommentRepository commentRepository;
+
+    @Autowired
+    EntityManager em;
 
     @DisplayName("로그인한 유저는 피드를 등록할 수 있다.")
     @Test
@@ -95,7 +104,7 @@ class ArticleServiceTest {
                 .isInstanceOf(UnauthorizedAccess.class);
     }
 
-    @DisplayName("피드의 주인은 피드를 삭제할 수 있다.")
+    @DisplayName("피드의 주인은 피드를 삭제할 수 있다. 피드 삭제 시 댓글도 삭제 된다.")
     @Test
     void deleteArticle() {
         //given
@@ -106,12 +115,21 @@ class ArticleServiceTest {
         article.setUser(user);
         articleRepository.save(article);
 
+        Comment comment = Comment.builder().article(article).user(user).content("댓글 입니다.").build();
+        commentRepository.save(comment);
+
         //when
         articleService.deleteArticle(user.getId(), article.getId());
 
+        em.flush();
+        em.clear();
+
         //then
         Optional<Article> optionalArticle = articleRepository.findById(article.getId());
+        Optional<Comment> optionalComment = commentRepository.findById(comment.getId());
+
         assertThat(optionalArticle).isEmpty();
+        assertThat(optionalComment).isEmpty();
     }
 
     @DisplayName("이미 삭제된 피드를 삭제할 시 예외가 발생한다.")
