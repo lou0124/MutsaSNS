@@ -1,13 +1,10 @@
 package ohchangmin.sns.request;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ohchangmin.sns.domain.User;
-import ohchangmin.sns.service.AuthService;
 
-import static ohchangmin.sns.service.AuthService.*;
+import static ohchangmin.sns.service.AuthService.SignUpServiceRequest;
 
 @Getter
 @NoArgsConstructor

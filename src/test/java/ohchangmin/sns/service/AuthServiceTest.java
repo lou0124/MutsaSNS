@@ -5,8 +5,6 @@ import ohchangmin.sns.exception.MisMatchedPassword;
 import ohchangmin.sns.exception.NotFoundUser;
 import ohchangmin.sns.exception.UsernameAlreadyExists;
 import ohchangmin.sns.repository.UserRepository;
-import ohchangmin.sns.request.LoginRequest;
-import ohchangmin.sns.request.SignUpRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static ohchangmin.sns.service.AuthService.*;
+import static ohchangmin.sns.service.AuthService.SignUpServiceRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

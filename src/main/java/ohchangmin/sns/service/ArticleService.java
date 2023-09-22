@@ -10,7 +10,6 @@ import ohchangmin.sns.repository.ArticleImageRepository;
 import ohchangmin.sns.repository.ArticleRepository;
 import ohchangmin.sns.repository.CommentRepository;
 import ohchangmin.sns.repository.UserRepository;
-import ohchangmin.sns.request.ArticleCreateRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

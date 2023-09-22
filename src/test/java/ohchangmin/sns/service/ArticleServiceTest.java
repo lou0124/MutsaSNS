@@ -10,7 +10,6 @@ import ohchangmin.sns.repository.ArticleImageRepository;
 import ohchangmin.sns.repository.ArticleRepository;
 import ohchangmin.sns.repository.CommentRepository;
 import ohchangmin.sns.repository.UserRepository;
-import ohchangmin.sns.request.ArticleCreateRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
