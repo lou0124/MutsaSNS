@@ -1,10 +1,9 @@
-package ohchangmin.sns.request;
+package ohchangmin.sns.controller.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import static ohchangmin.sns.service.AuthService.SignUpServiceRequest;
+import ohchangmin.sns.service.request.SignUpServiceRequest;
 
 @Getter
 @NoArgsConstructor

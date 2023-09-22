@@ -1,11 +1,11 @@
 package ohchangmin.sns.controller;
 
 import lombok.RequiredArgsConstructor;
-import ohchangmin.sns.response.ArticleElement;
-import ohchangmin.sns.response.ArticleResponse;
-import ohchangmin.sns.response.ListResponse;
+import ohchangmin.sns.controller.response.ListResponse;
 import ohchangmin.sns.service.ArticleQueryService;
 import ohchangmin.sns.service.UserPrincipal;
+import ohchangmin.sns.service.response.ArticleElement;
+import ohchangmin.sns.service.response.ArticleResponse;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

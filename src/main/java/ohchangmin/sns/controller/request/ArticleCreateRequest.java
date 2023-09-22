@@ -1,4 +1,4 @@
-package ohchangmin.sns.request;
+package ohchangmin.sns.controller.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

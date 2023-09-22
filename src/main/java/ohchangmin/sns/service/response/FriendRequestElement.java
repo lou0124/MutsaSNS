@@ -1,4 +1,4 @@
-package ohchangmin.sns.response;
+package ohchangmin.sns.service.response;
 
 import lombok.Getter;
 import ohchangmin.sns.domain.UserFriend;

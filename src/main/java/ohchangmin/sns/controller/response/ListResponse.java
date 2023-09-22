@@ -1,4 +1,4 @@
-package ohchangmin.sns.response;
+package ohchangmin.sns.controller.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

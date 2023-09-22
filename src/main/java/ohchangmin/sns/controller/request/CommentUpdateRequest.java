@@ -1,4 +1,4 @@
-package ohchangmin.sns.request;
+package ohchangmin.sns.controller.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

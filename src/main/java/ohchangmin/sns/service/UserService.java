@@ -3,7 +3,7 @@ package ohchangmin.sns.service;
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.User;
 import ohchangmin.sns.repository.UserRepository;
-import ohchangmin.sns.response.UserResponse;
+import ohchangmin.sns.service.response.UserResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

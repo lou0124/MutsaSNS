@@ -7,7 +7,7 @@ import ohchangmin.sns.exception.NotAllowFollowSelf;
 import ohchangmin.sns.exception.NotFoundUserFriend;
 import ohchangmin.sns.repository.UserFriendRepository;
 import ohchangmin.sns.repository.UserRepository;
-import ohchangmin.sns.response.FriendRequestElement;
+import ohchangmin.sns.service.response.FriendRequestElement;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

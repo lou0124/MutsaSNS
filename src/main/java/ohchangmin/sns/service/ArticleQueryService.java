@@ -7,8 +7,8 @@ import ohchangmin.sns.repository.ArticleImageRepository;
 import ohchangmin.sns.repository.ArticleRepository;
 import ohchangmin.sns.repository.UserFollowRepository;
 import ohchangmin.sns.repository.UserFriendRepository;
-import ohchangmin.sns.response.ArticleElement;
-import ohchangmin.sns.response.ArticleResponse;
+import ohchangmin.sns.service.response.ArticleElement;
+import ohchangmin.sns.service.response.ArticleResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

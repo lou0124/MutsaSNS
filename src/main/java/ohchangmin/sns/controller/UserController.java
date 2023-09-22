@@ -2,9 +2,9 @@ package ohchangmin.sns.controller;
 
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.file.FileStore;
-import ohchangmin.sns.response.UserResponse;
 import ohchangmin.sns.service.UserPrincipal;
 import ohchangmin.sns.service.UserService;
+import ohchangmin.sns.service.response.UserResponse;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
