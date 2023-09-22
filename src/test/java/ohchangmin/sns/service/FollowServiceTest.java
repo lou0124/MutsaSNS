@@ -28,16 +28,9 @@ class FollowServiceTest {
     @Test
     void follow() {
         //given
-        User user1 = User.builder()
-                .username("user1")
-                .password("1234")
-                .build();
-        User user2 = User.builder()
-                .username("user2")
-                .password("1234")
-                .build();
-        userRepository.save(user1);
-        userRepository.save(user2);
+        User user1 = User.builder().username("user1").password("1234").build();
+        User user2 = User.builder().username("user2").password("1234").build();
+        userRepository.saveAll(List.of(user1, user2));
 
         //when
         followService.follow(user1.getId(), user2.getId());
@@ -51,10 +44,7 @@ class FollowServiceTest {
     @Test
     void notAllowFollowSelf() {
         //given
-        User user = User.builder()
-                .username("user")
-                .password("1234")
-                .build();
+        User user = User.builder().username("user").password("1234").build();
         userRepository.save(user);
 
         //when //then
@@ -66,16 +56,10 @@ class FollowServiceTest {
     @Test
     void unfollow() {
         //given
-        User user1 = User.builder()
-                .username("user1")
-                .password("1234")
-                .build();
-        User user2 = User.builder()
-                .username("user2")
-                .password("1234")
-                .build();
-        userRepository.save(user1);
-        userRepository.save(user2);
+        User user1 = User.builder().username("user1").password("1234").build();
+        User user2 = User.builder().username("user2").password("1234").build();
+        userRepository.saveAll(List.of(user1, user2));
+
         userFollowRepository.save(UserFollow.createFollow(user1, user2));
 
         //when

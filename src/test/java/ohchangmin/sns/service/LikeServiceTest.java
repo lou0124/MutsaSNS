@@ -34,10 +34,8 @@ class LikeServiceTest {
     void pushLike() {
         //given
         User user1 = User.builder().username("user1").password("1234").build();
-        userRepository.save(user1);
-
         User user2 = User.builder().username("user2").password("1234").build();
-        userRepository.save(user2);
+        userRepository.saveAll(List.of(user1, user2));
 
         Article article = Article.builder().title("제목 입니다.").content("내용 입니다.").build();
         article.setUser(user1);
@@ -73,10 +71,8 @@ class LikeServiceTest {
     void cancelLike() {
         //given
         User user1 = User.builder().username("user1").password("1234").build();
-        userRepository.save(user1);
-
         User user2 = User.builder().username("user2").password("1234").build();
-        userRepository.save(user2);
+        userRepository.saveAll(List.of(user1, user2));
 
         Article article = Article.builder().title("제목 입니다.").content("내용 입니다.").build();
         article.setUser(user1);

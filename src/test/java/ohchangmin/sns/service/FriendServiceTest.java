@@ -26,16 +26,9 @@ class FriendServiceTest {
     @Test
     void requestFriends() {
         //given
-        User user1 = User.builder()
-                .username("user1")
-                .password("1234")
-                .build();
-        User user2 = User.builder()
-                .username("user2")
-                .password("1234")
-                .build();
-        userRepository.save(user1);
-        userRepository.save(user2);
+        User user1 = User.builder().username("user1").password("1234").build();
+        User user2 = User.builder().username("user2").password("1234").build();
+        userRepository.saveAll(List.of(user1, user2));
 
         //when
         friendService.requestFriends(user1.getId(), user2.getId());
@@ -52,16 +45,10 @@ class FriendServiceTest {
     @Test
     void requestFriendAccept() {
         //given
-        User user1 = User.builder()
-                .username("user1")
-                .password("1234")
-                .build();
-        User user2 = User.builder()
-                .username("user2")
-                .password("1234")
-                .build();
-        userRepository.save(user1);
-        userRepository.save(user2);
+        User user1 = User.builder().username("user1").password("1234").build();
+        User user2 = User.builder().username("user2").password("1234").build();
+        userRepository.saveAll(List.of(user1, user2));
+
         UserFriend userFriend = UserFriend.builder()
                 .from(user1)
                 .to(user2)
@@ -85,16 +72,10 @@ class FriendServiceTest {
     @Test
     void requestFriendReject() {
         //given
-        User user1 = User.builder()
-                .username("user1")
-                .password("1234")
-                .build();
-        User user2 = User.builder()
-                .username("user2")
-                .password("1234")
-                .build();
-        userRepository.save(user1);
-        userRepository.save(user2);
+        User user1 = User.builder().username("user1").password("1234").build();
+        User user2 = User.builder().username("user2").password("1234").build();
+        userRepository.saveAll(List.of(user1, user2));
+
         UserFriend userFriend = UserFriend.builder()
                 .from(user1)
                 .to(user2)

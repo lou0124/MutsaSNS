@@ -23,11 +23,7 @@ class UserServiceTest {
     @Test
     void changImage() {
         //given
-        User user = User.builder()
-                .username("user")
-                .password("1234")
-                .build();
-
+        User user = User.builder().username("user").password("1234").build();
         userRepository.save(user);
 
         //when
