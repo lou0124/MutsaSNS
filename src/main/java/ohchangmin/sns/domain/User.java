@@ -11,7 +11,10 @@ import java.util.List;
 
 @Entity
 @Getter
-@Table(name = "users")
+@Table(
+        name = "users",
+        indexes = @Index(name = "idx_users_username", columnList = "username")
+)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseTime {
 
