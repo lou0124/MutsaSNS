@@ -1,5 +1,6 @@
 package ohchangmin.sns.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.controller.request.ArticleCreateRequest;
 import ohchangmin.sns.file.FileStore;
@@ -21,7 +22,7 @@ public class ArticleController {
 
     @PostMapping("/articles")
     public void createArticle(@AuthenticationPrincipal UserPrincipal userPrincipal,
-                              @RequestBody ArticleCreateRequest request) {
+                              @RequestBody @Valid ArticleCreateRequest request) {
         articleService.uploadArticle(userPrincipal.getId(), request.getTitle(), request.getContent());
     }
 
