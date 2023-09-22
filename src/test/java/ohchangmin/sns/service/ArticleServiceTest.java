@@ -41,13 +41,8 @@ class ArticleServiceTest {
         User user = User.builder().username("user").password("1234").build();
         userRepository.save(user);
 
-        ArticleCreateRequest request = ArticleCreateRequest.builder()
-                .title("제목입니다.")
-                .content("내용입니다.")
-                .build();
-
         //when
-        articleService.uploadArticle(user.getId(), request);
+        articleService.uploadArticle(user.getId(), "제목입니다.", "내용입니다.");
 
         //then
         List<Article> all = articleRepository.findAll();

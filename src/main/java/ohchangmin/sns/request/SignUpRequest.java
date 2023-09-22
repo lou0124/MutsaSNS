@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ohchangmin.sns.domain.User;
+import ohchangmin.sns.service.AuthService;
+
+import static ohchangmin.sns.service.AuthService.*;
 
 @Getter
 @NoArgsConstructor
@@ -20,20 +23,12 @@ public class SignUpRequest {
 
     private String phone;
 
-    @Builder
-    private SignUpRequest(String username, String password, String email, String phone) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    public User toEntityWithEncodedPassword(String encodedPassword) {
-        return User.builder()
+    public SignUpServiceRequest toServiceRequest() {
+        return SignUpServiceRequest.builder()
                 .username(username)
-                .password(encodedPassword)
+                .password(password)
                 .email(email)
-                .phone(phone)
+                .password(password)
                 .build();
     }
 }

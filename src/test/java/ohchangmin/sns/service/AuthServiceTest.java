@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static ohchangmin.sns.service.AuthService.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -31,7 +32,7 @@ class AuthServiceTest {
     @Test
     void signup() {
         //given
-        SignUpRequest request = SignUpRequest.builder()
+        SignUpServiceRequest request = SignUpServiceRequest.builder()
                 .username("user")
                 .password("1234")
                 .build();
@@ -55,7 +56,7 @@ class AuthServiceTest {
 
         userRepository.save(user);
 
-        SignUpRequest request = SignUpRequest.builder()
+        SignUpServiceRequest request = SignUpServiceRequest.builder()
                 .username("user")
                 .password("1234")
                 .build();
@@ -76,13 +77,8 @@ class AuthServiceTest {
 
         userRepository.save(user);
 
-        LoginRequest request = LoginRequest.builder()
-                .username("user")
-                .password("1234")
-                .build();
-
         //when
-        String username = authService.login(request);
+        String username = authService.login("user", "1234");
 
         //then
         assertThat(user.getUsername()).isEqualTo(username);
@@ -99,27 +95,16 @@ class AuthServiceTest {
 
         userRepository.save(user);
 
-        LoginRequest request = LoginRequest.builder()
-                .username("user")
-                .password("12345")
-                .build();
-
         //when //then
-        assertThatThrownBy(() -> authService.login(request))
+        assertThatThrownBy(() -> authService.login("user", "12345"))
                 .isInstanceOf(MisMatchedPassword.class);
     }
 
     @DisplayName("존재 하지 않는 아이디로 로그인시 예외가 발생한다.")
     @Test
     void loginNotFoundUser() {
-        //given
-        LoginRequest request = LoginRequest.builder()
-                .username("user")
-                .password("12345")
-                .build();
-
         //when //then
-        assertThatThrownBy(() -> authService.login(request))
+        assertThatThrownBy(() -> authService.login("user", "12345"))
                 .isInstanceOf(NotFoundUser.class);
     }
 }

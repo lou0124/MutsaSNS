@@ -2,10 +2,12 @@ package ohchangmin.sns.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import ohchangmin.sns.domain.User;
 import ohchangmin.sns.jwt.JwtTokenUtils;
 import ohchangmin.sns.request.LoginRequest;
 import ohchangmin.sns.request.SignUpRequest;
 import ohchangmin.sns.service.AuthService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +25,12 @@ public class AuthController {
 
     @PostMapping("/signup")
     public void signUp(@RequestBody @Valid SignUpRequest request) {
-        authService.signUp(request);
+        authService.signUp(request.toServiceRequest());
     }
 
     @PostMapping("/login")
     public Map<String, String> login(@RequestBody @Valid LoginRequest request) {
-        String username = authService.login(request);
+        String username = authService.login(request.getUsername(), request.getPassword());
         String token = jwtTokenUtils.generateToken(username);
         return Map.of("token", token);
     }

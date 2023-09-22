@@ -22,7 +22,7 @@ public class ArticleController {
     @PostMapping("/articles")
     public void createArticle(@AuthenticationPrincipal UserPrincipal userPrincipal,
                               @RequestBody ArticleCreateRequest request) {
-        articleService.uploadArticle(userPrincipal.getId(), request);
+        articleService.uploadArticle(userPrincipal.getId(), request.getTitle(), request.getContent());
     }
 
     @PostMapping("/articles/{articleId}/article-images")

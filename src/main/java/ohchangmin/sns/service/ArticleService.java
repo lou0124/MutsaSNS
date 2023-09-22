@@ -26,9 +26,9 @@ public class ArticleService {
     private final ArticleImageRepository articleImageRepository;
     private final CommentRepository commentRepository;
 
-    public void uploadArticle(Long userId, ArticleCreateRequest request) {
+    public void uploadArticle(Long userId, String title, String content) {
         User user = userRepository.findByIdOrThrow(userId);
-        Article article = request.toEntity();
+        Article article = Article.createArticle(title, content);
         user.uploadArticle(article);
     }
 

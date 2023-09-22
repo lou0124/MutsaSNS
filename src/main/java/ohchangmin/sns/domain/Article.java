@@ -50,6 +50,13 @@ public class Article extends BaseTime {
         this.content = content;
     }
 
+    public static Article createArticle(String title, String content) {
+        return Article.builder()
+                .title(title)
+                .content(content)
+                .build();
+    }
+
     public void setUser(User user) {
         this.user = user;
     }

@@ -1,13 +1,15 @@
 package ohchangmin.sns.service;
 
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import ohchangmin.sns.domain.User;
 import ohchangmin.sns.exception.MisMatchedPassword;
 import ohchangmin.sns.exception.NotFoundUser;
 import ohchangmin.sns.exception.UsernameAlreadyExists;
 import ohchangmin.sns.repository.UserRepository;
-import ohchangmin.sns.request.LoginRequest;
-import ohchangmin.sns.request.SignUpRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +23,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void signUp(SignUpRequest request) {
+    public void signUp(SignUpServiceRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new UsernameAlreadyExists();
         }
@@ -30,13 +32,32 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    public String login(LoginRequest request) {
-        User user = userRepository.findByUsername(request.getUsername())
+    public String login(String username, String password) {
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(NotFoundUser::new);
 
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new MisMatchedPassword();
         }
         return user.getUsername();
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @Getter
+    public static class SignUpServiceRequest {
+        private String username;
+        private String password;
+        private String email;
+        private String phone;
+
+        public User toEntityWithEncodedPassword(String encodedPassword) {
+            return User.builder()
+                    .username(username)
+                    .password(encodedPassword)
+                    .email(email)
+                    .phone(phone)
+                    .build();
+        }
     }
 }
