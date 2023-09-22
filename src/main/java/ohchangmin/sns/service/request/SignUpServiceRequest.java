@@ -1,18 +1,24 @@
 package ohchangmin.sns.service.request;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import ohchangmin.sns.domain.User;
 
-@Builder
-@AllArgsConstructor
 @Getter
 public class SignUpServiceRequest {
-    private String username;
-    private String password;
-    private String email;
-    private String phone;
+
+    private final String username;
+    private final String password;
+    private final String email;
+    private final String phone;
+
+    @Builder
+    public SignUpServiceRequest(String username, String password, String email, String phone) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+    }
 
     public User toEntityWithEncodedPassword(String encodedPassword) {
         return User.builder()
