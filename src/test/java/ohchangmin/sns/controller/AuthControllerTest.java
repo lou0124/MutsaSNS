@@ -55,6 +55,40 @@ class AuthControllerTest {
                 .andDo(print());
     }
 
+    @DisplayName("회원가입 시 유저아이디를 입력 해야한다.")
+    @Test
+    void signUpWithOutUsername() throws Exception {
+        // given
+        SignUpRequest request = SignUpRequest.builder().password("1234").build();
+
+        //when //then
+        mockMvc.perform(post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request))
+                )
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.statusCode").value(400))
+                .andExpect(jsonPath("$.message").value("유저아이디를 입력해야합니다."))
+                .andDo(print());
+    }
+
+    @DisplayName("회원가입 시 패스워드를 입력 해야한다.")
+    @Test
+    void signUpWithOutPassword() throws Exception {
+        // given
+        SignUpRequest request = SignUpRequest.builder().username("user").build();
+
+        //when //then
+        mockMvc.perform(post("/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request))
+                )
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.statusCode").value(400))
+                .andExpect(jsonPath("$.message").value("패스워드를 입력해야합니다."))
+                .andDo(print());
+    }
+
     @DisplayName("로그인을 할 수 있다.")
     @Test
     void login() throws Exception {
