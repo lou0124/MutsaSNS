@@ -1,6 +1,7 @@
 package ohchangmin.sns.controller.request;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ohchangmin.sns.service.request.SignUpServiceRequest;
@@ -18,6 +19,12 @@ public class SignUpRequest {
     private String email;
 
     private String phone;
+
+    @Builder
+    private SignUpRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public SignUpServiceRequest toServiceRequest() {
         return SignUpServiceRequest.builder()
