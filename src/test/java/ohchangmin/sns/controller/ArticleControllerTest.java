@@ -21,21 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(
-        controllers = ArticleController.class,
-        excludeFilters = {
-                @ComponentScan.Filter(
-                        type = FilterType.ASSIGNABLE_TYPE,
-                        classes = JwtTokenFilter.class
-                )
-        })
-@AutoConfigureMockMvc(addFilters = false)
-class ArticleControllerTest {
-
-    @Autowired MockMvc mockMvc;
-    @Autowired ObjectMapper objectMapper;
-    @MockBean ArticleService articleService;
-    @MockBean FileStore fileStore;
+class ArticleControllerTest extends ControllerIntegrationTestSupport {
 
     @WithMockCustomUser
     @DisplayName("피드를 등록 할 수 있다.")

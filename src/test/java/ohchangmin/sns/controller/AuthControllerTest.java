@@ -24,21 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(
-        controllers = AuthController.class,
-        excludeFilters = {
-                @ComponentScan.Filter(
-                        type = FilterType.ASSIGNABLE_TYPE,
-                        classes = JwtTokenFilter.class
-                )
-        })
-@AutoConfigureMockMvc(addFilters = false)
-class AuthControllerTest {
-
-    @Autowired MockMvc mockMvc;
-    @Autowired ObjectMapper objectMapper;
-    @MockBean AuthService authService;
-    @MockBean JwtTokenUtils jwtTokenUtils;
+class AuthControllerTest extends ControllerIntegrationTestSupport {
 
     @DisplayName("회원가입을 할 수 있다.")
     @Test
