@@ -29,7 +29,7 @@ public class ArticleController {
     @PostMapping("/articles/{articleId}/article-images")
     public void addImage(@AuthenticationPrincipal UserPrincipal userPrincipal,
                          @PathVariable Long articleId,
-                         List<MultipartFile> images) {
+                         @RequestParam List<MultipartFile> images) {
         List<String> imageUrls = images.stream()
                 .map(fileStore::storeFile)
                 .collect(Collectors.toList());
