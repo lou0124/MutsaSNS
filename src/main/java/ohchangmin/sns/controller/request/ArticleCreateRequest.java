@@ -1,6 +1,7 @@
 package ohchangmin.sns.controller.request;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,4 +14,10 @@ public class ArticleCreateRequest {
 
     @NotBlank(message = "피드 내용이 입력 되어야 합니다.")
     private String content;
+
+    @Builder
+    private ArticleCreateRequest(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }
