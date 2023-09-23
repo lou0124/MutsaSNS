@@ -66,9 +66,9 @@ class AuthControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request))
                 )
-                .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.statusCode").value(400))
                 .andExpect(jsonPath("$.message").value("유저아이디를 입력해야합니다."))
+                .andExpect(status().isBadRequest())
                 .andDo(print());
     }
 
@@ -83,9 +83,9 @@ class AuthControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request))
                 )
-                .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.statusCode").value(400))
                 .andExpect(jsonPath("$.message").value("패스워드를 입력해야합니다."))
+                .andExpect(status().isBadRequest())
                 .andDo(print());
     }
 
@@ -108,6 +108,51 @@ class AuthControllerTest {
                 )
                 .andExpect(jsonPath("$.token").value(token))
                 .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @DisplayName("로그인 시 유저아이디를 입력 해야한다.")
+    @Test
+    void loginWithoutUsername() throws Exception {
+        // given
+        String token = "token";
+
+        LoginRequest request = LoginRequest.builder().password("1234").build();
+
+        given(authService.login(anyString(), anyString())).willReturn("user");
+        given(jwtTokenUtils.generateToken(anyString())).willReturn(token);
+
+        //when //then
+        mockMvc.perform(post("/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request))
+                )
+                .andExpect(jsonPath("$.statusCode").value(400))
+                .andExpect(jsonPath("$.message").value("유저아이디를 입력해야합니다."))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+    }
+
+    @DisplayName("로그인 시 패스워드를 입력 해야한다.")
+    @Test
+    void loginWithoutPassword() throws Exception {
+        // given
+        String username = "user";
+        String token = "token";
+
+        LoginRequest request = LoginRequest.builder().username(username).build();
+
+        given(authService.login(anyString(), anyString())).willReturn(username);
+        given(jwtTokenUtils.generateToken(anyString())).willReturn(token);
+
+        //when //then
+        mockMvc.perform(post("/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request))
+                )
+                .andExpect(jsonPath("$.statusCode").value(400))
+                .andExpect(jsonPath("$.message").value("패스워드를 입력해야합니다."))
+                .andExpect(status().isBadRequest())
                 .andDo(print());
     }
 }
