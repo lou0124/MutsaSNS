@@ -37,16 +37,16 @@ public class ArticleController {
         articleService.addArticleImages(userPrincipal.getId(), articleId, imageUrls);
     }
 
+    @DeleteMapping("/articles/{articleId}")
+    public void deleteArticle(@AuthenticationPrincipal UserPrincipal userPrincipal,
+                              @PathVariable Long articleId) {
+        articleService.deleteArticle(userPrincipal.getId(), articleId);
+    }
+
     @DeleteMapping("/article-images/{articleImageId}")
     public void deleteImage(@AuthenticationPrincipal UserPrincipal userPrincipal,
                             @PathVariable Long articleImageId) {
         String imageUrl = articleService.deleteArticleImages(userPrincipal.getId(), articleImageId);
         fileStore.deleteFile(imageUrl);
-    }
-
-    @DeleteMapping("/articles/{articleId}")
-    public void deleteArticle(@AuthenticationPrincipal UserPrincipal userPrincipal,
-                              @PathVariable Long articleId) {
-        articleService.deleteArticle(userPrincipal.getId(), articleId);
     }
 }

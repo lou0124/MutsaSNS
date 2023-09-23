@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -93,6 +92,27 @@ class ArticleControllerTest extends ControllerIntegrationTestSupport {
                 .andExpect(jsonPath("$.statusCode").value(400))
                 .andExpect(jsonPath("$.message").value("파일을 추가해야합니다."))
                 .andExpect(status().isBadRequest())
+                .andDo(print());
+    }
+
+
+    @WithMockCustomUser
+    @DisplayName("피드를 삭제할 수 있다.")
+    @Test
+    void deleteArticle() throws Exception {
+        //when //then
+        mockMvc.perform(delete("/articles/{articleId}", 1L))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @WithMockCustomUser
+    @DisplayName("피드 이미지를 삭제할 수 있다.")
+    @Test
+    void deleteImage() throws Exception {
+        //when //then
+        mockMvc.perform(delete("/article-images/{articleImageId}", 1L))
+                .andExpect(status().isOk())
                 .andDo(print());
     }
 }
