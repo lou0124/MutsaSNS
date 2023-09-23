@@ -38,7 +38,7 @@ class ArticleControllerTest {
     @MockBean FileStore fileStore;
 
     @WithMockCustomUser
-    @DisplayName("회원가입을 할 수 있다.")
+    @DisplayName("피드를 등록 할 수 있다.")
     @Test
     void createArticle() throws Exception {
         // given
