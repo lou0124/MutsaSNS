@@ -1,21 +1,10 @@
 package ohchangmin.sns.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import ohchangmin.sns.controller.request.LoginRequest;
 import ohchangmin.sns.controller.request.SignUpRequest;
-import ohchangmin.sns.jwt.JwtTokenFilter;
-import ohchangmin.sns.jwt.JwtTokenUtils;
-import ohchangmin.sns.service.AuthService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
