@@ -5,7 +5,9 @@ import ohchangmin.sns.controller.security.WithMockCustomUser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -30,7 +32,7 @@ class ArticleControllerTest extends ControllerIntegrationTestSupport {
     }
 
     @WithMockCustomUser
-    @DisplayName("피드등록 시 제목을 입력해야한다.")
+    @DisplayName("피드 등록 시 제목을 입력해야한다.")
     @Test
     void createArticleWithoutTitle() throws Exception {
         // given
@@ -48,7 +50,7 @@ class ArticleControllerTest extends ControllerIntegrationTestSupport {
     }
 
     @WithMockCustomUser
-    @DisplayName("피드등록 시 내용을 입력해야한다.")
+    @DisplayName("피드 등록 시 내용을 입력해야한다.")
     @Test
     void createArticleWithoutContent() throws Exception {
         // given
@@ -61,6 +63,35 @@ class ArticleControllerTest extends ControllerIntegrationTestSupport {
                 )
                 .andExpect(jsonPath("$.statusCode").value(400))
                 .andExpect(jsonPath("$.message").value("피드 제목이 입력 되어야 합니다."))
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+    }
+
+    @WithMockCustomUser
+    @DisplayName("피드에 이미지를 입력할 수 있다.")
+    @Test
+    void addImage() throws Exception {
+        // given
+        MockMultipartFile image1 = new MockMultipartFile("images", "image1.jpg", "image/jpeg", "Some image1".getBytes());
+        MockMultipartFile image2 = new MockMultipartFile("images", "image2.jpg", "image/jpeg", "Some image2".getBytes());
+
+        //when //then
+        mockMvc.perform(multipart("/articles/{articleId}/article-images", 1L)
+                        .file(image1)
+                        .file(image2)
+                )
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @WithMockCustomUser
+    @DisplayName("피드에 이미지 추가 시 파일을 꼭 추가해야 한다.")
+    @Test
+    void addImageWithoutImages() throws Exception {
+        //when //then
+        mockMvc.perform(multipart("/articles/{articleId}/article-images", 1L))
+                .andExpect(jsonPath("$.statusCode").value(400))
+                .andExpect(jsonPath("$.message").value("파일을 추가해야합니다."))
                 .andExpect(status().isBadRequest())
                 .andDo(print());
     }
