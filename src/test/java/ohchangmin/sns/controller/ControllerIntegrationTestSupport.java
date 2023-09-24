@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ohchangmin.sns.file.FileStore;
 import ohchangmin.sns.jwt.JwtTokenFilter;
 import ohchangmin.sns.jwt.JwtTokenUtils;
+import ohchangmin.sns.service.ArticleQueryService;
 import ohchangmin.sns.service.ArticleService;
 import ohchangmin.sns.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(
-        controllers = {AuthController.class, ArticleController.class},
+        controllers = {AuthController.class, ArticleController.class, ArticleQueryController.class},
         excludeFilters = {
                 @ComponentScan.Filter(
                         type = FilterType.ASSIGNABLE_TYPE,
@@ -29,7 +30,9 @@ public abstract class ControllerIntegrationTestSupport {
     @Autowired ObjectMapper objectMapper;
 
     @MockBean AuthService authService;
-    @MockBean JwtTokenUtils jwtTokenUtils;
     @MockBean ArticleService articleService;
+    @MockBean ArticleQueryService articleQueryService;
+
+    @MockBean JwtTokenUtils jwtTokenUtils;
     @MockBean FileStore fileStore;
 }

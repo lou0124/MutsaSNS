@@ -1,10 +1,14 @@
 package ohchangmin.sns.service.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import ohchangmin.sns.domain.Article;
 
 import java.util.Objects;
 
+@Builder
+@AllArgsConstructor
 @Getter
 public class ArticleElement {
 
