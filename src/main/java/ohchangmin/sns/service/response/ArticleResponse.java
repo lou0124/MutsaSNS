@@ -1,5 +1,7 @@
 package ohchangmin.sns.service.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import ohchangmin.sns.domain.Article;
@@ -7,7 +9,8 @@ import ohchangmin.sns.domain.ArticleImage;
 import ohchangmin.sns.domain.Comment;
 
 import java.util.List;
-
+@Builder
+@AllArgsConstructor
 @Getter
 public class ArticleResponse {
 
@@ -40,8 +43,10 @@ public class ArticleResponse {
                 .toList();
     }
 
+    @Builder
+    @AllArgsConstructor
     @Data
-    private static class ArticleImageResponse {
+    public static class ArticleImageResponse {
 
         private Long id;
         private String imagesUrl;
@@ -52,8 +57,10 @@ public class ArticleResponse {
         }
     }
 
+    @Builder
+    @AllArgsConstructor
     @Data
-    private static class CommentResponse {
+    public static class CommentResponse {
 
         private Long id;
         private String username;
