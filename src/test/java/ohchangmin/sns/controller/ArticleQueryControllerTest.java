@@ -1,5 +1,6 @@
 package ohchangmin.sns.controller;
 
+import ohchangmin.sns.controller.security.WithMockCustomUser;
 import ohchangmin.sns.domain.Article;
 import ohchangmin.sns.domain.ArticleImage;
 import ohchangmin.sns.domain.Comment;
@@ -95,4 +96,63 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
                 .andExpect(status().isOk())
                 .andDo(print());
     }
+
+    @WithMockCustomUser
+    @DisplayName("팔로워의 피드 목록을 조회할 수 있다.")
+    @Test
+    void findFollowArticles() throws Exception {
+        //given
+        ArticleElement articleElement1 = ArticleElement.builder().id(1L).username("user").title("제목1").thumbnail("이미지 경로1").build();
+        ArticleElement articleElement2 = ArticleElement.builder().id(2L).username("user").title("제목2").thumbnail("이미지 경로2").build();
+
+        given(articleQueryService.findFollowersArticles(ArgumentMatchers.anyLong()))
+                .willReturn(List.of(articleElement1, articleElement2));
+
+        //when //then
+        mockMvc.perform(get("/articles/follows")
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(jsonPath("$.count").value(2))
+                .andExpect(jsonPath("$.data.length()").value(2))
+                .andExpect(jsonPath("$.data[0].id").value(1))
+                .andExpect(jsonPath("$.data[0].username").value("user"))
+                .andExpect(jsonPath("$.data[0].title").value("제목1"))
+                .andExpect(jsonPath("$.data[0].thumbnail").value("이미지 경로1"))
+                .andExpect(jsonPath("$.data[1].id").value(2))
+                .andExpect(jsonPath("$.data[1].username").value("user"))
+                .andExpect(jsonPath("$.data[1].title").value("제목2"))
+                .andExpect(jsonPath("$.data[1].thumbnail").value("이미지 경로2"))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @WithMockCustomUser
+    @DisplayName("친구의 피드 목록을 조회할 수 있다.")
+    @Test
+    void findFriendsArticles() throws Exception {
+        //given
+        ArticleElement articleElement1 = ArticleElement.builder().id(1L).username("user").title("제목1").thumbnail("이미지 경로1").build();
+        ArticleElement articleElement2 = ArticleElement.builder().id(2L).username("user").title("제목2").thumbnail("이미지 경로2").build();
+
+        given(articleQueryService.findFriendsArticles(ArgumentMatchers.anyLong()))
+                .willReturn(List.of(articleElement1, articleElement2));
+
+        //when //then
+        mockMvc.perform(get("/articles/friends")
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(jsonPath("$.count").value(2))
+                .andExpect(jsonPath("$.data.length()").value(2))
+                .andExpect(jsonPath("$.data[0].id").value(1))
+                .andExpect(jsonPath("$.data[0].username").value("user"))
+                .andExpect(jsonPath("$.data[0].title").value("제목1"))
+                .andExpect(jsonPath("$.data[0].thumbnail").value("이미지 경로1"))
+                .andExpect(jsonPath("$.data[1].id").value(2))
+                .andExpect(jsonPath("$.data[1].username").value("user"))
+                .andExpect(jsonPath("$.data[1].title").value("제목2"))
+                .andExpect(jsonPath("$.data[1].thumbnail").value("이미지 경로2"))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
 }
