@@ -5,13 +5,12 @@ import ohchangmin.sns.service.response.ArticleElement;
 import ohchangmin.sns.service.response.ArticleResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.springframework.http.MediaType;
 
 import java.util.List;
 
 import static ohchangmin.sns.service.response.ArticleResponse.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
@@ -121,6 +120,7 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
 
         //when //then
         mockMvc.perform(get("/articles/follows")
+                        .header("Authorization", "Bearer " + "your encoded token")
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpectAll(
@@ -156,6 +156,7 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
 
         //when //then
         mockMvc.perform(get("/articles/friends")
+                        .header("Authorization", "Bearer " + "your encoded token")
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpectAll(

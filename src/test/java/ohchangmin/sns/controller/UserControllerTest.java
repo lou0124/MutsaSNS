@@ -28,6 +28,7 @@ class UserControllerTest extends ControllerIntegrationTestSupport {
         //when //then
         mockMvc.perform(multipart(("/change-profile"))
                         .file(image)
+                        .header("Authorization", "Bearer " + "your encoded token")
                 )
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -37,7 +38,6 @@ class UserControllerTest extends ControllerIntegrationTestSupport {
                 ));
     }
 
-    @WithMockCustomUser
     @DisplayName("유저를 조회할 수 있다.")
     @Test
     void findUser() throws Exception {

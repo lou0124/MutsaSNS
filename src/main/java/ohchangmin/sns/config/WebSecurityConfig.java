@@ -41,6 +41,8 @@ public class WebSecurityConfig {
                         authHttp -> authHttp
                                 .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/users/{userId}")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/users/{userId}/articles", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/articles/{articleId}", "GET")).permitAll()
                                 .anyRequest().authenticated()
                 ).sessionManagement(
                         sessionManagement -> sessionManagement
