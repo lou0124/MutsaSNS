@@ -1,0 +1,29 @@
+== User API
+
+=== 프로필 이미지 수정
+
+HTTP Request
+
+include::{snippets}/user-profile-change/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/user-profile-change/http-response.adoc[]
+
+CURL
+
+include::{snippets}/user-profile-change/curl-request.adoc[]
+
+=== 유저 조회
+
+HTTP Request
+
+include::{snippets}/user-find/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/user-find/http-response.adoc[]
+
+CURL
+
+include::{snippets}/user-find/curl-request.adoc[]

@@ -10,3 +10,5 @@ include::api/auth.adoc[]
 
 include::api/article.adoc[]
 
+include::api/user.adoc[]
+

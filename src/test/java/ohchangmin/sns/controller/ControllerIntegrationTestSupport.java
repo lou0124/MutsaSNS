@@ -7,6 +7,7 @@ import ohchangmin.sns.jwt.JwtTokenUtils;
 import ohchangmin.sns.service.ArticleQueryService;
 import ohchangmin.sns.service.ArticleService;
 import ohchangmin.sns.service.AuthService;
+import ohchangmin.sns.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,7 +18,11 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(
-        controllers = {AuthController.class, ArticleController.class, ArticleQueryController.class},
+        controllers = {
+                AuthController.class,
+                ArticleController.class,
+                ArticleQueryController.class,
+                UserController.class},
         excludeFilters = {
                 @ComponentScan.Filter(
                         type = FilterType.ASSIGNABLE_TYPE,
@@ -34,6 +39,7 @@ public abstract class ControllerIntegrationTestSupport {
     @MockBean AuthService authService;
     @MockBean ArticleService articleService;
     @MockBean ArticleQueryService articleQueryService;
+    @MockBean UserService userService;
 
     @MockBean JwtTokenUtils jwtTokenUtils;
     @MockBean FileStore fileStore;

@@ -1,6 +1,6 @@
 == Auth API
 
-=== 회원가입
+=== 회원 가입
 
 HTTP Request
 
