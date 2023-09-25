@@ -1,10 +1,6 @@
 package ohchangmin.sns.controller;
 
 import ohchangmin.sns.controller.security.WithMockCustomUser;
-import ohchangmin.sns.domain.Article;
-import ohchangmin.sns.domain.ArticleImage;
-import ohchangmin.sns.domain.Comment;
-import ohchangmin.sns.domain.User;
 import ohchangmin.sns.service.response.ArticleElement;
 import ohchangmin.sns.service.response.ArticleResponse;
 import org.junit.jupiter.api.DisplayName;
@@ -15,10 +11,10 @@ import org.springframework.http.MediaType;
 import java.util.List;
 
 import static ohchangmin.sns.service.response.ArticleResponse.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -33,7 +29,7 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
         ArticleElement articleElement1 = ArticleElement.builder().id(1L).username("user").title("제목1").thumbnail("이미지 경로1").build();
         ArticleElement articleElement2 = ArticleElement.builder().id(2L).username("user").title("제목2").thumbnail("이미지 경로2").build();
 
-        given(articleQueryService.findArticles(ArgumentMatchers.anyLong()))
+        given(articleQueryService.findArticles(anyLong()))
                 .willReturn(List.of(articleElement1, articleElement2));
 
         //when //then
@@ -78,7 +74,7 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
                 .like(10L)
                 .build();
 
-        given(articleQueryService.findArticle(ArgumentMatchers.anyLong()))
+        given(articleQueryService.findArticle(anyLong()))
                 .willReturn(articleResponse);
 
         //when //then
@@ -120,7 +116,7 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
         ArticleElement articleElement1 = ArticleElement.builder().id(1L).username("user").title("제목1").thumbnail("이미지 경로1").build();
         ArticleElement articleElement2 = ArticleElement.builder().id(2L).username("user").title("제목2").thumbnail("이미지 경로2").build();
 
-        given(articleQueryService.findFollowersArticles(ArgumentMatchers.anyLong()))
+        given(articleQueryService.findFollowersArticles(anyLong()))
                 .willReturn(List.of(articleElement1, articleElement2));
 
         //when //then
@@ -155,7 +151,7 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
         ArticleElement articleElement1 = ArticleElement.builder().id(1L).username("user").title("제목1").thumbnail("이미지 경로1").build();
         ArticleElement articleElement2 = ArticleElement.builder().id(2L).username("user").title("제목2").thumbnail("이미지 경로2").build();
 
-        given(articleQueryService.findFriendsArticles(ArgumentMatchers.anyLong()))
+        given(articleQueryService.findFriendsArticles(anyLong()))
                 .willReturn(List.of(articleElement1, articleElement2));
 
         //when //then
