@@ -1,4 +1,4 @@
-== Article API
+== Like API
 
 === 좋아요 요청
 

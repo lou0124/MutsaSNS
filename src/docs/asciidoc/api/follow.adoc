@@ -1,0 +1,30 @@
+== Follow API
+
+=== 팔로우
+
+HTTP Request
+
+include::{snippets}/follow/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/follow/http-response.adoc[]
+
+CURL
+
+include::{snippets}/follow/curl-request.adoc[]
+
+=== 언팔로우
+
+HTTP Request
+
+include::{snippets}/unfollow/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/unfollow/http-response.adoc[]
+
+CURL
+
+include::{snippets}/unfollow/curl-request.adoc[]
+
