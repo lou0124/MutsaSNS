@@ -16,7 +16,7 @@ public class LikeController {
 
     @PostMapping("/articles/{articleId}/likes")
     public void requestLike(@AuthenticationPrincipal UserPrincipal userPrincipal,
-                     @PathVariable Long articleId) {
+                            @PathVariable Long articleId) {
         likeService.pushLike(userPrincipal.getId(), articleId);
     }
 }

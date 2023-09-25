@@ -1,0 +1,15 @@
+== Article API
+
+=== 좋아요 요청
+
+HTTP Request
+
+include::{snippets}/like-request/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/like-request/http-response.adoc[]
+
+CURL
+
+include::{snippets}/like-request/curl-request.adoc[]
