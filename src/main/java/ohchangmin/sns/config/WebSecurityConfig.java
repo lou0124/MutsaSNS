@@ -30,6 +30,7 @@ public class WebSecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return web -> web.ignoring()
+                .requestMatchers(new AntPathRequestMatcher("/docs/**"))
                 .requestMatchers(toH2Console());
     }
 

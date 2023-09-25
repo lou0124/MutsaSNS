@@ -1,0 +1,71 @@
+== Article API
+
+=== 신규피드 등록
+
+HTTP Request
+
+include::{snippets}/article-create/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/article-create/http-response.adoc[]
+
+CURL
+
+include::{snippets}/article-create/curl-request.adoc[]
+
+=== 피드 단건 조회
+
+HTTP Request
+
+include::{snippets}/article-find/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/article-find/http-response.adoc[]
+
+CURL
+
+include::{snippets}/article-find/curl-request.adoc[]
+
+=== 나의 피드 목록 조회
+
+HTTP Request
+
+include::{snippets}/my-articles-find/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/my-articles-find/http-response.adoc[]
+
+CURL
+
+include::{snippets}/my-articles-find/curl-request.adoc[]
+
+=== 팔로워 피드 목록 조회
+
+HTTP Request
+
+include::{snippets}/followers-articles-find/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/followers-articles-find/http-response.adoc[]
+
+CURL
+
+include::{snippets}/followers-articles-find/curl-request.adoc[]
+
+=== 친구 피드 목록 조회
+
+HTTP Request
+
+include::{snippets}/friends-articles-find/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/friends-articles-find/http-response.adoc[]
+
+CURL
+
+include::{snippets}/friends-articles-find/curl-request.adoc[]

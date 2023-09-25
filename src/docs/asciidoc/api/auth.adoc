@@ -1,0 +1,29 @@
+== Auth API
+
+=== 회원가입
+
+HTTP Request
+
+include::{snippets}/sign-up/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/sign-up/http-response.adoc[]
+
+CURL
+
+include::{snippets}/sign-up/curl-request.adoc[]
+
+=== 로그인
+
+HTTP Request
+
+include::{snippets}/login/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/login/http-response.adoc[]
+
+CURL
+
+include::{snippets}/login/curl-request.adoc[]

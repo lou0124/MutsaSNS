@@ -8,6 +8,7 @@ import ohchangmin.sns.service.ArticleQueryService;
 import ohchangmin.sns.service.ArticleService;
 import ohchangmin.sns.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -23,6 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
                         classes = JwtTokenFilter.class
                 )
         })
+@AutoConfigureRestDocs
 @AutoConfigureMockMvc(addFilters = false)
 public abstract class ControllerIntegrationTestSupport {
 

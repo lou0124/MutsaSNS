@@ -16,6 +16,9 @@ import java.util.List;
 
 import static ohchangmin.sns.service.response.ArticleResponse.*;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -50,7 +53,11 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
                         jsonPath("$.data[1].thumbnail").value("이미지 경로2")
                 )
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("my-articles-find",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ));
     }
 
     @DisplayName("피드 단건 조회를 할 수 있다.")
@@ -98,7 +105,11 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
                         jsonPath("$.like").value(10)
                 )
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("article-find",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ));
     }
 
     @WithMockCustomUser
@@ -129,7 +140,11 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
                         jsonPath("$.data[1].thumbnail").value("이미지 경로2")
                 )
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("followers-articles-find",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ));
     }
 
     @WithMockCustomUser
@@ -160,7 +175,11 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
                         jsonPath("$.data[1].thumbnail").value("이미지 경로2")
                 )
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("friends-articles-find",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ));
     }
 
 }

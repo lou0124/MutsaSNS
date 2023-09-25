@@ -8,6 +8,9 @@ import org.springframework.http.MediaType;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -27,7 +30,11 @@ class AuthControllerTest extends ControllerIntegrationTestSupport {
                         .content(objectMapper.writeValueAsString(request))
                 )
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("sign-up",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ));
     }
 
     @DisplayName("회원가입 시 유저아이디를 입력 해야한다.")
@@ -83,7 +90,11 @@ class AuthControllerTest extends ControllerIntegrationTestSupport {
                 )
                 .andExpect(jsonPath("$.token").value(token))
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("login",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint())
+                ));
     }
 
     @DisplayName("로그인 시 유저아이디를 입력 해야한다.")
