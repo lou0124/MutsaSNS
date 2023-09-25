@@ -120,7 +120,7 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
 
         //when //then
         mockMvc.perform(get("/articles/follows")
-                        .header("Authorization", "Bearer " + "your encoded token")
+                        .header("Authorization", AUTH_VALUE)
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpectAll(
@@ -156,7 +156,7 @@ class ArticleQueryControllerTest extends ControllerIntegrationTestSupport {
 
         //when //then
         mockMvc.perform(get("/articles/friends")
-                        .header("Authorization", "Bearer " + "your encoded token")
+                        .header("Authorization", AUTH_VALUE)
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpectAll(

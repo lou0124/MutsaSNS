@@ -12,3 +12,5 @@ include::api/article.adoc[]
 
 include::api/user.adoc[]
 
+include::api/like.adoc[]
+

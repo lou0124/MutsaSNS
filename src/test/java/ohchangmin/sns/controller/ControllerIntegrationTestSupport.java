@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ohchangmin.sns.file.FileStore;
 import ohchangmin.sns.jwt.JwtTokenFilter;
 import ohchangmin.sns.jwt.JwtTokenUtils;
-import ohchangmin.sns.service.ArticleQueryService;
-import ohchangmin.sns.service.ArticleService;
-import ohchangmin.sns.service.AuthService;
-import ohchangmin.sns.service.UserService;
+import ohchangmin.sns.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,7 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
                 AuthController.class,
                 ArticleController.class,
                 ArticleQueryController.class,
-                UserController.class},
+                UserController.class,
+                LikeController.class},
         excludeFilters = {
                 @ComponentScan.Filter(
                         type = FilterType.ASSIGNABLE_TYPE,
@@ -33,6 +31,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc(addFilters = false)
 public abstract class ControllerIntegrationTestSupport {
 
+    protected final static String AUTH_VALUE = "Bearer $TOKEN";
+
     @Autowired MockMvc mockMvc;
     @Autowired ObjectMapper objectMapper;
 
@@ -40,6 +40,7 @@ public abstract class ControllerIntegrationTestSupport {
     @MockBean ArticleService articleService;
     @MockBean ArticleQueryService articleQueryService;
     @MockBean UserService userService;
+    @MockBean LikeService likeService;
 
     @MockBean JwtTokenUtils jwtTokenUtils;
     @MockBean FileStore fileStore;

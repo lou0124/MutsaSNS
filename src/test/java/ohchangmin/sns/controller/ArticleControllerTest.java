@@ -46,7 +46,7 @@ class ArticleControllerTest extends ControllerIntegrationTestSupport {
 
         //when //then
         mockMvc.perform(post("/articles")
-                        .header("Authorization", "Bearer " + "your encoded token")
+                        .header("Authorization", AUTH_VALUE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request))
                 )
@@ -65,7 +65,7 @@ class ArticleControllerTest extends ControllerIntegrationTestSupport {
 
         //when //then
         mockMvc.perform(post("/articles")
-                        .header("Authorization", "Bearer " + "your encoded token")
+                        .header("Authorization", AUTH_VALUE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request))
                 )
@@ -87,7 +87,7 @@ class ArticleControllerTest extends ControllerIntegrationTestSupport {
         mockMvc.perform(multipart("/articles/{articleId}/article-images", 1L)
                         .file(image1)
                         .file(image2)
-                        .header("Authorization", "Bearer " + "your encoded token")
+                        .header("Authorization", AUTH_VALUE)
                 )
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -99,7 +99,7 @@ class ArticleControllerTest extends ControllerIntegrationTestSupport {
     void addImageWithoutImages() throws Exception {
         //when //then
         mockMvc.perform(multipart("/articles/{articleId}/article-images", 1L)
-                        .header("Authorization", "Bearer " + "your encoded token")
+                        .header("Authorization", AUTH_VALUE)
                 )
                 .andExpect(jsonPath("$.statusCode").value(400))
                 .andExpect(jsonPath("$.message").value("파일을 추가해야합니다."))
@@ -114,7 +114,7 @@ class ArticleControllerTest extends ControllerIntegrationTestSupport {
     void deleteArticle() throws Exception {
         //when //then
         mockMvc.perform(delete("/articles/{articleId}", 1L)
-                        .header("Authorization", "Bearer " + "your encoded token")
+                        .header("Authorization", AUTH_VALUE)
                 )
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -126,7 +126,7 @@ class ArticleControllerTest extends ControllerIntegrationTestSupport {
     void deleteImage() throws Exception {
         //when //then
         mockMvc.perform(delete("/article-images/{articleImageId}", 1L)
-                        .header("Authorization", "Bearer " + "your encoded token")
+                        .header("Authorization", AUTH_VALUE)
                 )
                 .andExpect(status().isOk())
                 .andDo(print());

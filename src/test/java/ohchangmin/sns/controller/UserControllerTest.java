@@ -28,7 +28,7 @@ class UserControllerTest extends ControllerIntegrationTestSupport {
         //when //then
         mockMvc.perform(multipart(("/change-profile"))
                         .file(image)
-                        .header("Authorization", "Bearer " + "your encoded token")
+                        .header("Authorization", AUTH_VALUE)
                 )
                 .andExpect(status().isOk())
                 .andDo(print())
