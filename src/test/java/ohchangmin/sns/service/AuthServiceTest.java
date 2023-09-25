@@ -33,6 +33,8 @@ class AuthServiceTest {
         SignUpServiceRequest request = SignUpServiceRequest.builder()
                 .username("user")
                 .password("1234")
+                .email("abc@example.com")
+                .phone("010-0000-0000")
                 .build();
         //when
         authService.signUp(request);
