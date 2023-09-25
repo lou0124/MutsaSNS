@@ -21,7 +21,8 @@ import org.springframework.test.web.servlet.MockMvc;
                 ArticleQueryController.class,
                 UserController.class,
                 LikeController.class,
-                FollowController.class
+                FollowController.class,
+                FriendController.class
         },
         excludeFilters = {
                 @ComponentScan.Filter(
@@ -44,6 +45,7 @@ public abstract class ControllerIntegrationTestSupport {
     @MockBean UserService userService;
     @MockBean LikeService likeService;
     @MockBean FollowService followService;
+    @MockBean FriendService friendService;
 
     @MockBean JwtTokenUtils jwtTokenUtils;
     @MockBean FileStore fileStore;

@@ -16,7 +16,6 @@ class LikeControllerTest extends ControllerIntegrationTestSupport {
     @DisplayName("좋아요 요청을 할 수 있다.")
     @Test
     void requestLike() throws Exception {
-
         //when //then
         mockMvc.perform(post(("/articles/{articleId}/likes"), 1L)
                         .header("Authorization", AUTH_VALUE)

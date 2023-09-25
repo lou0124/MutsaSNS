@@ -16,5 +16,7 @@ include::api/like.adoc[]
 
 include::api/follow.adoc[]
 
+include::api/friend.adoc[]
+
 
 

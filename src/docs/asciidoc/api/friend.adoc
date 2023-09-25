@@ -1,0 +1,57 @@
+== Friend API
+
+=== 친구 요청
+
+HTTP Request
+
+include::{snippets}/friend-request/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/friend-request/http-response.adoc[]
+
+CURL
+
+include::{snippets}/friend-request/curl-request.adoc[]
+
+=== 친구 요청 조회
+
+HTTP Request
+
+include::{snippets}/friend-request-find/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/friend-request-find/http-response.adoc[]
+
+CURL
+
+include::{snippets}/friend-request-find/curl-request.adoc[]
+
+=== 친구 요청 수락
+
+HTTP Request
+
+include::{snippets}/friend-request-accept/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/friend-request-accept/http-response.adoc[]
+
+CURL
+
+include::{snippets}/friend-request-accept/curl-request.adoc[]
+
+=== 친구 요청 거절
+
+HTTP Request
+
+include::{snippets}/friend-request-reject/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/friend-request-reject/http-response.adoc[]
+
+CURL
+
+include::{snippets}/friend-request-reject/curl-request.adoc[]
