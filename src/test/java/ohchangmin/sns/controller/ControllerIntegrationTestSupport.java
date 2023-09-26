@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.MockMvc;
                         classes = JwtTokenFilter.class
                 )
         })
-@AutoConfigureRestDocs
+@AutoConfigureRestDocs(uriScheme = "https", uriHost = "api.sns.com", uriPort = 443)
 @AutoConfigureMockMvc(addFilters = false)
 public abstract class ControllerIntegrationTestSupport {
 
