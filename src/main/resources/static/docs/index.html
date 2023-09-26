@@ -510,14 +510,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /auth/signup HTTP/1.1
 Content-Type: application/json
-Content-Length: 84
+Content-Length: 108
 Host: localhost:8080
 
 {
   "username" : "user",
   "password" : "1234",
-  "email" : null,
-  "phone" : null
+  "email" : "abc@example.com",
+  "phone" : "010-0000-0000"
 }</code></pre>
 </div>
 </div>
@@ -539,8 +539,8 @@ Host: localhost:8080
     -d '{
   "username" : "user",
   "password" : "1234",
-  "email" : null,
-  "phone" : null
+  "email" : "abc@example.com",
+  "phone" : "010-0000-0000"
 }'</code></pre>
 </div>
 </div>
@@ -854,11 +854,11 @@ Content-Length: 250
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /articles/1/comments HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer $TOKEN
-Content-Length: 33
+Content-Length: 43
 Host: localhost:8080
 
 {
-  "content" : "댓글 내용"
+  "content" : "댓글 내용입니다."
 }</code></pre>
 </div>
 </div>
@@ -879,7 +879,7 @@ Host: localhost:8080
     -H 'Content-Type: application/json' \
     -H 'Authorization: Bearer $TOKEN' \
     -d '{
-  "content" : "댓글 내용"
+  "content" : "댓글 내용입니다."
 }'</code></pre>
 </div>
 </div>
@@ -894,11 +894,11 @@ Host: localhost:8080
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /comments/1 HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer $TOKEN
-Content-Length: 33
+Content-Length: 43
 Host: localhost:8080
 
 {
-  "content" : "댓글 내용"
+  "content" : "댓글 내용입니다."
 }</code></pre>
 </div>
 </div>
@@ -919,7 +919,7 @@ Host: localhost:8080
     -H 'Content-Type: application/json' \
     -H 'Authorization: Bearer $TOKEN' \
     -d '{
-  "content" : "댓글 내용"
+  "content" : "댓글 내용입니다."
 }'</code></pre>
 </div>
 </div>

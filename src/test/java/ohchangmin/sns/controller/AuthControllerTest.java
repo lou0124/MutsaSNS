@@ -21,7 +21,12 @@ class AuthControllerTest extends ControllerIntegrationTestSupport {
     @Test
     void signUp() throws Exception {
         // given
-        SignUpRequest request = SignUpRequest.builder().username("user").password("1234").build();
+        SignUpRequest request = SignUpRequest.builder()
+                .username("user")
+                .password("1234")
+                .email("abc@example.com")
+                .phone("010-0000-0000")
+                .build();
 
         //when //then
         mockMvc.perform(post("/auth/signup")
