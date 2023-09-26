@@ -1,0 +1,43 @@
+== Comment API
+
+=== 댓글 등록
+
+HTTP Request
+
+include::{snippets}/comment-create/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/comment-create/http-response.adoc[]
+
+CURL
+
+include::{snippets}/comment-create/curl-request.adoc[]
+
+=== 댓글 수정
+
+HTTP Request
+
+include::{snippets}/comment-update/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/comment-update/http-response.adoc[]
+
+CURL
+
+include::{snippets}/comment-update/curl-request.adoc[]
+
+=== 댓글 삭제
+
+HTTP Request
+
+include::{snippets}/comment-delete/http-request.adoc[]
+
+HTTP Response
+
+include::{snippets}/comment-delete/http-response.adoc[]
+
+CURL
+
+include::{snippets}/comment-delete/curl-request.adoc[]

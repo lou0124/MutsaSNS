@@ -1,6 +1,6 @@
 == Article API
 
-=== 신규 피드 등록
+=== 피드 등록
 
 HTTP Request
 

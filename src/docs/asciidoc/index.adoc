@@ -10,6 +10,8 @@ include::api/auth.adoc[]
 
 include::api/article.adoc[]
 
+include::api/comment.adoc[]
+
 include::api/user.adoc[]
 
 include::api/like.adoc[]

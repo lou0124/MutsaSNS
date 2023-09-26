@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
                 AuthController.class,
                 ArticleController.class,
                 ArticleQueryController.class,
+                CommentController.class,
                 UserController.class,
                 LikeController.class,
                 FollowController.class,
@@ -36,17 +37,18 @@ public abstract class ControllerIntegrationTestSupport {
 
     protected final static String AUTH_VALUE = "Bearer $TOKEN";
 
-    @Autowired MockMvc mockMvc;
-    @Autowired ObjectMapper objectMapper;
+    @Autowired protected MockMvc mockMvc;
+    @Autowired protected ObjectMapper objectMapper;
 
-    @MockBean AuthService authService;
-    @MockBean ArticleService articleService;
-    @MockBean ArticleQueryService articleQueryService;
-    @MockBean UserService userService;
-    @MockBean LikeService likeService;
-    @MockBean FollowService followService;
-    @MockBean FriendService friendService;
+    @MockBean protected AuthService authService;
+    @MockBean protected ArticleService articleService;
+    @MockBean protected ArticleQueryService articleQueryService;
+    @MockBean protected CommentService commentService;
+    @MockBean protected UserService userService;
+    @MockBean protected LikeService likeService;
+    @MockBean protected FollowService followService;
+    @MockBean protected FriendService friendService;
 
-    @MockBean JwtTokenUtils jwtTokenUtils;
-    @MockBean FileStore fileStore;
+    @MockBean protected JwtTokenUtils jwtTokenUtils;
+    @MockBean protected FileStore fileStore;
 }

@@ -10,4 +10,8 @@ public class CommentCreateRequest {
 
     @NotBlank(message = "댓글 내용이 입력 되어야 합니다.")
     private String content;
+
+    public CommentCreateRequest(String content) {
+        this.content = content;
+    }
 }
