@@ -1,4 +1,4 @@
-# Project_2_OhChangMin
+# SNS API
 
 SNS API를 제공 하는 서비스 입니다.
 
@@ -47,8 +47,19 @@ h2 `2.1.214`
 2. applicaion.yml에서 file.dir에 이미지를 저장할 경로를 지정해야합니다.
 3. gradle 빌드 후 실행
 
+<br/> 
+
+### API 문서 확인
+1. 위의 실행 방법에 따라 프로그램을 실행시킵니다.
+2. http://localhost:8080/docs/index.html 해당 url에 접속하여 문서를 확인 할 수 있습니다.
+
+API 문서 확인 화면 예시
+![스크린샷 2023-09-26 오전 11 15 18](https://github.com/lou0124/MutsaSNS/assets/63856928/4590718f-83d0-4fcf-b2ec-b8e8324b82ee)
+
 <br/>
 
 ### 개발 기간
 
 2023.8.3 ~ 2023.8.8
+<br>
+2023.9.22 ~ 2023.9.26
